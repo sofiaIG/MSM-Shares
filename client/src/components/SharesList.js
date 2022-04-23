@@ -1,8 +1,8 @@
 import SharesItems from "./SharesItem";
 
-const SharesList = ({shares}) => {
+const SharesList = ({shares, index}) => {
     const sharesList = shares.map((share) =>{
-        return <SharesItems share = {share} />
+        return <SharesItems share = {share} index = {index} />
     })
 
     return(
