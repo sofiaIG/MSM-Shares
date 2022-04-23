@@ -1,13 +1,20 @@
+const SharesItem = ({share, index, handleShareClicked}) => {
 
-
-const SharesItems = ({}) => {
+    const handleClick = () => {
+        handleShareClicked(share);
+    }
 
 
     return(
-        <div>
-            <p>I am the SharesItems</p>
+        <div class = "shares-item">
+            <p>Name: {share["Meta Data"]["2. Symbol"]} </p>
+            <p>Interval: {share["Meta Data"]["4. Interval"]}</p>
+            <p>Output Size: {share["Meta Data"]["5. Output Size"]}</p>
+            <p>Time Zone: {share["Meta Data"]["6. Time Zone"]}</p>
+            <br></br>
         </div>
+    
     );
-}
 
-export default SharesItems;
+    }
+export default SharesItem;

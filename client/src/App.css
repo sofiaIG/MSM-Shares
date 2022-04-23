@@ -1,4 +1,13 @@
-.App {
+.shares-item{
+ display: flex;
+ /* text-align: center; */
+ flex-direction: column;
+}
+.items{
+  
+}
+
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +44,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */
