@@ -1,4 +1,4 @@
-import { getShares } from "../components/SharesService";
+import { getShares, deleteShares } from "../components/SharesService";
 import React, { useState, useEffect } from 'react';
 import SharesList from "../components/SharesList";
 import SharesShow from "../components/SharesShow";
@@ -26,12 +26,14 @@ const MainPage =()=>{
         const indexToDel =  temp.map(s=>s._id).indexOf(id);
         temp.splice(indexToDel, 1);
         setShares(temp);
+        deleteShares(id)
+
     }
 
 
     //REMOVE WHEN DONE WITH ADDING FEATURE ALONG WITH THE BUTTON
     const tempHandleClick = () => {
-        setSelectedShare(shares[0])
+        setSelectedShare(shares[1])
         setShareClicked(true);
     }
 
@@ -39,7 +41,7 @@ const MainPage =()=>{
         <>
             <SharesList />
             <button onClick={tempHandleClick}>CLICK ME</button>
-            <SharesShow share={selectedShare} clicked={shareClicked}/>
+            <SharesShow share={selectedShare} clicked={shareClicked} removeShare={removeShare}/>
         </>
     )
 }

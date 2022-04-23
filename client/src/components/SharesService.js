@@ -15,7 +15,7 @@ export const postShares =(payload)=>{
 }   
 
 export const deleteShares =(id)=>{
-    return fetch(baseURL, +id, {
+    return fetch(baseURL + id, {
         method: 'DELETE'
     })
 }
