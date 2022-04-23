@@ -1,6 +1,7 @@
 
 import { getShares, deleteShares } from "../components/SharesService";
 import React, { useState, useEffect } from 'react';
+import NewShareForm from "../components/NewShareForm";
 import SharesList from "../components/SharesList";
 import SharesShow from "../components/SharesShow";
 
@@ -45,10 +46,13 @@ const MainPage =()=>{
 
     return (
         <>
+
+            <NewShareForm addShare = {addShare}/>
             <SharesList shares = {shares} handleShareClicked={handleShareClicked} />
             <SharesShow share={selectedShare} clicked={shareClicked} removeShare={removeShare} setClicked={setShareClicked}/>
     </>
    
+
     )
 }
 
