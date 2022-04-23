@@ -1,5 +1,4 @@
-
-const SharesItems = ({share, index}) => {
+const SharesItem = ({share, index}) => {
 
     return(
         <div>
@@ -9,5 +8,5 @@ const SharesItems = ({share, index}) => {
         </div>
     );
 
-
-export default SharesItems;
+    }
+export default SharesItem;

@@ -1,9 +1,9 @@
 import React from 'react';
-import SharesItems from "./SharesItem";
+import SharesItem from "./SharesItem";
 
 const SharesList = ({shares, index}) => {
     const shareList = shares.map((share) => {
-        return <SharesItems share = {share} index = {index} />
+        return <SharesItem share = {share} index = {index} />
     })
     
     return(

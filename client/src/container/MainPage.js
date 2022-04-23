@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import SharesList from "../components/SharesList";
 import SharesShow from "../components/SharesShow";
 
+
 const MainPage =()=>{
 
     const [shares, setShares] = useState([]);
@@ -38,9 +39,9 @@ const MainPage =()=>{
 
     return (
         <>
-            <SharesList />
+            <SharesList shares = {shares} />
             <SharesShow share={selectedShare} clicked={shareClicked} removeShare={removeShare} setClicked={setShareClicked}/>
-    
+    </>
    
     )
 }
