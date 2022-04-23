@@ -1,5 +1,6 @@
 import { getShares } from "../components/SharesService";
 import React, { useState, useEffect } from 'react';
+import SharesList from "../components/SharesList";
 
 const MainPage =()=>{
 
@@ -27,7 +28,7 @@ const MainPage =()=>{
 
     return (
         <>
-
+            <SharesList />
         </>
     )
 }
