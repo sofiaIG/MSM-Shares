@@ -5,6 +5,12 @@
  border: 1px solid black
 }
 
+.main-page {
+    display:flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
 /* .App {
   text-align: center;
 }

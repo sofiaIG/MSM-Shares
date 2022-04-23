@@ -6,7 +6,7 @@ import SharesList from "../components/SharesList";
 import SharesShow from "../components/SharesShow";
 
 
-const MainPage =()=>{
+const MainPage =({formClicked})=>{
 
     const [shares, setShares] = useState([]);
     const [shareClicked, setShareClicked] = useState(false);
@@ -45,12 +45,12 @@ const MainPage =()=>{
     // }
 
     return (
-        <>
+        <div className="main-page">
 
-            <NewShareForm addShare = {addShare}/>
+            { formClicked ? <NewShareForm addShare = {addShare}/> : null}
             <SharesList shares = {shares} handleShareClicked={handleShareClicked} />
             <SharesShow share={selectedShare} clicked={shareClicked} removeShare={removeShare} setClicked={setShareClicked}/>
-    </>
+    </div>
    
 
     )
