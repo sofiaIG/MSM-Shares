@@ -1,11 +1,13 @@
-const SharesItems = ({share}) => {
-    
+
+const SharesItems = ({share, index}) => {
+
     return(
         <div>
-            <h2>{share.symbol}</h2>
-            <p>I am the SharesItems</p>
+            {share["Meta Data"]["2. Symbol"]}
+            <p>I am the SharesList </p>
+
         </div>
     );
-}
+
 
 export default SharesItems;
