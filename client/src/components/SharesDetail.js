@@ -6,7 +6,8 @@ const SharesDetail = () => {
 
     return (
         <>
-            <h4>I am Share Detail</h4>
+            <h4>GRAPH</h4>
+            <p></p>
         </>
     );
 }

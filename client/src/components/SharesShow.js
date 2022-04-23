@@ -1,12 +1,13 @@
 import React from 'react';
+import OverallPerformance from './OverallPerformance';
+import SharesDetail from './SharesDetail';
 
 const SharesShow = ({share, clicked}) => {
 
-    
 
     return (
         <>
-            <h3>I am Shares Show</h3>
+            {clicked ? <SharesDetail share={share}/> : <OverallPerformance />}
         </>
     );
 }

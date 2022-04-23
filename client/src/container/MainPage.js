@@ -29,9 +29,16 @@ const MainPage =()=>{
     }
 
 
+    //REMOVE WHEN DONE WITH ADDING FEATURE ALONG WITH THE BUTTON
+    const tempHandleClick = () => {
+        setSelectedShare(shares[0])
+        setShareClicked(true);
+    }
+
     return (
         <>
             <SharesList />
+            <button onClick={tempHandleClick}>CLICK ME</button>
             <SharesShow share={selectedShare} clicked={shareClicked}/>
         </>
     )
