@@ -1,12 +1,15 @@
 import React from 'react';
 
 
-const NewShare = () => {
+const NewShare = ({handleFormClick}) => {
 
+    const handleClick = () => {
+        handleFormClick()
+    }
 
     return (
         <>
-            <button>New Share</button>
+            <button onClick={handleClick}>New Share</button>
         </>
     );
 }
