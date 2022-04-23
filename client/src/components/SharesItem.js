@@ -1,4 +1,9 @@
-const SharesItem = ({share, index}) => {
+const SharesItem = ({share, index, handleShareClicked}) => {
+
+    const handleClick = () => {
+        handleShareClicked(share);
+    }
+
 
     return(
         <div class = "shares-item">
