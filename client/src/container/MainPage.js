@@ -13,7 +13,7 @@ const MainPage =()=>{
         getShares().then((allShares)=>{
             setShares(allShares)
         })
-    })
+    }, [])
 
     const addShare =(share) =>{
         const temp = shares.map(s=>s);

@@ -1,7 +1,7 @@
 import React from 'react'; 
 
 
-const SharesDetail = () => {
+const SharesDetail = ({share}) => {
 
 
     return (
