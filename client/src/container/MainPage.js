@@ -1,9 +1,13 @@
 import { getShares } from "../components/SharesService";
 import React, { useState, useEffect } from 'react';
+import SharesList from "../components/SharesList";
+import SharesShow from "../components/SharesShow";
 
 const MainPage =()=>{
 
     const [shares, setShares] = useState([]);
+    const [shareClicked, setShareClicked] = useState(false);
+    const [selectedShare, setSelectedShare] = useState(null)
 
     useEffect(()=>{
         getShares().then((allShares)=>{
@@ -27,7 +31,8 @@ const MainPage =()=>{
 
     return (
         <>
-
+            <SharesList />
+            <SharesShow share={selectedShare} clicked={shareClicked}/>
         </>
     )
 }
