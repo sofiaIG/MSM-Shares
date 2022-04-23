@@ -1,4 +1,4 @@
-
+import SharesItems from "./SharesItem";
 
 const SharesList = ({}) => {
 
