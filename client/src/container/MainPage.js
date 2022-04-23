@@ -31,11 +31,11 @@ const MainPage =()=>{
     }
 
 
-    //REMOVE WHEN DONE WITH ADDING FEATURE ALONG WITH THE BUTTON
-    const tempHandleClick = () => {
-        setSelectedShare(shares[1])
-        setShareClicked(true);
-    }
+    // NEED TO CREATE A FUNCTION TO PASS DOWN TO INDIVIDUAL SHARES THAT SETS CLICKED TO TRUE AND PASSES THE SHARE THAT WAS CLICKED
+    // const tempHandleClick = () => {
+    //     setSelectedShare(shares[1])
+    //     setShareClicked(true);
+    // }
 
     return (
         <>
