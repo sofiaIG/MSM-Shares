@@ -1,10 +1,8 @@
 .shares-item{
  display: flex;
  /* text-align: center; */
- flex-direction: column;
-}
-.items{
-  
+ flex-direction: row;
+ border: 1px solid black
 }
 
 /* .App {
