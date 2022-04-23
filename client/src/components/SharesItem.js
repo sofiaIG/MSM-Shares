@@ -8,6 +8,5 @@ const SharesItems = ({share, index}) => {
         </div>
     );
 
-}
 
 export default SharesItems;
