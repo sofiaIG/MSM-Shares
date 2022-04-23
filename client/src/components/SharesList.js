@@ -9,7 +9,7 @@ const SharesList = ({shares, handleShareClicked}) => {
     return(
         <div>
             {shareList}
-            <p>I am the SharesList </p>
+            {/* <p>I am the SharesList </p> */}
             </div>
     );
 }

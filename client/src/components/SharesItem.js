@@ -6,11 +6,14 @@ const SharesItem = ({share, index, handleShareClicked}) => {
 
 
     return(
-        <div onClick={handleClick}>
-            {share["Meta Data"]["2. Symbol"]}
-            <p>I am the SharesList </p>
-
+        <div class = "shares-item">
+            <p>Name: {share["Meta Data"]["2. Symbol"]} </p>
+            <p>Interval: {share["Meta Data"]["4. Interval"]}</p>
+            <p>Output Size: {share["Meta Data"]["5. Output Size"]}</p>
+            <p>Time Zone: {share["Meta Data"]["6. Time Zone"]}</p>
+            <br></br>
         </div>
+    
     );
 
     }
