@@ -41,7 +41,7 @@ const MainPage =()=>{
         <>
             <SharesList />
             <button onClick={tempHandleClick}>CLICK ME</button>
-            <SharesShow share={selectedShare} clicked={shareClicked} removeShare={removeShare}/>
+            <SharesShow share={selectedShare} clicked={shareClicked} removeShare={removeShare} setClicked={setShareClicked}/>
         </>
     )
 }

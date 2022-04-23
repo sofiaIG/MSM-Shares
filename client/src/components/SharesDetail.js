@@ -1,10 +1,11 @@
 import React from 'react'; 
 
 
-const SharesDetail = ({share, removeShare}) => {
+const SharesDetail = ({share, removeShare, setClicked}) => {
 
     const handleDelete = () => {
-        removeShare(share._id)
+        removeShare(share._id);
+        setClicked(false);
     }
 
     return (
