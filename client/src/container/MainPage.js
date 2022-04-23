@@ -30,7 +30,6 @@ const MainPage =()=>{
 
     }
 
-
     // NEED TO CREATE A FUNCTION TO PASS DOWN TO INDIVIDUAL SHARES THAT SETS CLICKED TO TRUE AND PASSES THE SHARE THAT WAS CLICKED
     // const tempHandleClick = () => {
     //     setSelectedShare(shares[1])
@@ -40,9 +39,9 @@ const MainPage =()=>{
     return (
         <>
             <SharesList />
-            <button onClick={tempHandleClick}>CLICK ME</button>
             <SharesShow share={selectedShare} clicked={shareClicked} removeShare={removeShare} setClicked={setShareClicked}/>
-        </>
+    
+   
     )
 }
 
