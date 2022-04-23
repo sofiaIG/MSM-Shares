@@ -1,5 +1,6 @@
 import { getShares } from "../components/SharesService";
 import React, { useState, useEffect } from 'react';
+import NewShareForm from "../components/NewShareForm";
 
 const MainPage =()=>{
 
@@ -8,8 +9,8 @@ const MainPage =()=>{
     useEffect(()=>{
         getShares().then((allShares)=>{
             setShares(allShares)
-        })
-    })
+        })   
+    }, [])
 
     const addShare =(share) =>{
         const temp = shares.map(s=>s);
@@ -27,6 +28,8 @@ const MainPage =()=>{
 
     return (
         <>
+        <NewShareForm addShare = {addShare}/>
+        
 
         </>
     )
