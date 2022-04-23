@@ -1,10 +1,13 @@
-import { getShares } from "../components/SharesService";
+import { getShares, deleteShares } from "../components/SharesService";
 import React, { useState, useEffect } from 'react';
 import SharesList from "../components/SharesList";
+import SharesShow from "../components/SharesShow";
 
 const MainPage =()=>{
 
     const [shares, setShares] = useState([]);
+    const [shareClicked, setShareClicked] = useState(false);
+    const [selectedShare, setSelectedShare] = useState(null)
 
     useEffect(()=>{
         getShares().then((allShares)=>{
@@ -23,12 +26,22 @@ const MainPage =()=>{
         const indexToDel =  temp.map(s=>s._id).indexOf(id);
         temp.splice(indexToDel, 1);
         setShares(temp);
+        deleteShares(id)
+
     }
-    
+
+    // NEED TO CREATE A FUNCTION TO PASS DOWN TO INDIVIDUAL SHARES THAT SETS CLICKED TO TRUE AND PASSES THE SHARE THAT WAS CLICKED
+    // const tempHandleClick = () => {
+    //     setSelectedShare(shares[1])
+    //     setShareClicked(true);
+    // }
+
     return (
         <>
             <SharesList />
-        </>
+            <SharesShow share={selectedShare} clicked={shareClicked} removeShare={removeShare} setClicked={setShareClicked}/>
+    
+   
     )
 }
 
