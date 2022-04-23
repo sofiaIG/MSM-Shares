@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import { postShares } from '../components/SharesService';
 
-const NewShareForm = (addShare) => {
+
+const NewShareForm = ({addShare}) => {
     const [name, setName] = useState('');
     const [numberShares, setNumberShares] = useState(0)
 
-    const handleName =event => setName(event);
-    const handleShares = event => setNumberShares(event)
+    const handleName =event => setName(event.target.value);
+    const handleShares = event => setNumberShares(event.target.value)
 
     const handleSubmit =(event) =>{
         event.preventDefault();
@@ -14,8 +16,9 @@ const NewShareForm = (addShare) => {
             numberShares
         }
         addShare(shares);
-        setName = ('');
-        setNumberShares = (0)
+        postShares(shares);
+        // setName('');
+        // setNumberShares(0)
 
     }
 
@@ -24,14 +27,14 @@ const NewShareForm = (addShare) => {
             <h2>Add a share</h2>
             <div>
                 <label htmlFor='name'>Name of the Company: </label>
-                <input onChange={handleName} type = 'text' id = 'name'/>
+                <input onChange={handleName} value ={name} type = 'text' id = 'name'/>
             </div>
             <div>
                 <label htmlFor='number-of-shares'>Number of Shares: </label>
-                <input onChange={handleShares} type = 'number' min = '1'
+                <input onChange={handleShares} value ={numberShares} type = 'number' min = '1'
                 max = '50' id = 'number-of-shares'/>
             </div>
-            <input type="submit" value="Save" id="save"/>
+            <button type="submit"  id="save">Save</button>
         </form>
     );
 }
