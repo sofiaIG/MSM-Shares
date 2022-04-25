@@ -11,8 +11,8 @@ const MainPage =({formClicked})=>{
     const [shares, setShares] = useState([]);
     const [shareClicked, setShareClicked] = useState(false);
     const [selectedShare, setSelectedShare] = useState(null);
-    const [apiData, setApiData] = useState([]);
     const [shareNames, setShareNames] = useState(null)
+    const [shareHistory, setshareHistory] = useState([])
 
 
     useEffect(()=>{
@@ -36,12 +36,18 @@ const MainPage =({formClicked})=>{
 
     const loadShareData = (names) => {
         let shareData = []
+        let shareHistory = []
         names.forEach((name) => {
+            fetch(`https://api.coincap.io/v2/assets/${name}/history?interval=m30`)
+            .then(res => res.json())
+            .then(data => shareHistory.push(data));
+
             fetch(`https://api.coincap.io/v2/assets/${name}`)
             .then(res => res.json())
-            .then(data => shareData.push(data))
+            .then(data => shareData.push(data));
         })
 
+        setshareHistory(shareHistory)
         setShares(shareData)
 
     }
@@ -61,42 +67,6 @@ const MainPage =({formClicked})=>{
 
     }
 
-    // const loadShares = () => {
-
-    //     const shareData = [];
-
-    //     const savedShares = [];
-        
-    //     getShares().then(data => {
-    //         // savedShares.push(data)
-    //         // console.log(data[0])
-    //         for(let i=0; i<data.length; i++){
-    //             savedShares.push(data[i]);
-    //         }
-    //     } )
-
-    //     // console.log(savedShares)
-
-    //     const mappingFunc = (data) => {
-    //         data.map((object) => {return object.name})
-    //     }
-
-    //     const shareNames = mappingFunc(savedShares);
-
-    //     console.log(shareNames);
-
-        // shareNames.forEach((name) => {
-        //     fetch(`https://api.coincap.io/v2/assets/${name}`)
-        //     .then(res => res.json())
-        //     .then((data) => {
-        //         shareData.push(data)
-        //     });
-            
-    //     // });
- 
-    //     setShares(shareData);
-    // }
-
     const handleShareClicked = (share) => {
         setSelectedShare(share);
         setShareClicked(true);
@@ -104,12 +74,9 @@ const MainPage =({formClicked})=>{
 
     return (
         <div className="main-page">
-
-
-
-            {/* { formClicked ? <NewShareForm addShare = {addShare}/> : null}
+            { formClicked ? <NewShareForm addShare = {addShare}/> : null}
             <SharesList shares = {shares} handleShareClicked={handleShareClicked} />
-            <SharesShow share={selectedShare} clicked={shareClicked} removeShare={removeShare} setClicked={setShareClicked}/> */}
+            <SharesShow share={selectedShare} clicked={shareClicked} removeShare={removeShare} setClicked={setShareClicked}/>
     </div>
    
 
