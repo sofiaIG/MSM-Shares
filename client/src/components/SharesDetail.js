@@ -11,8 +11,9 @@ const SharesDetail = ({share, removeShare, setClicked}) => {
     return (
         <div className='share-detail'>
             <h4>GRAPH</h4>
-            <p><strong>Symbol: </strong>{share["Meta Data"]["2. Symbol"]}</p>
-            <p><strong>Time Zone: </strong>{share["Meta Data"]["6. Time Zone"]}</p>
+            <p><strong>Name: </strong>{share.data.name}</p>
+            <p><strong>Symbol: </strong>{share.data.symbol}</p>
+            <p><strong>Price: </strong>{share.data.priceUsd}</p>
             <p>Profit: </p>
             <p>Shares held: </p>
             <button onClick={handleDelete}>Sell</button>
