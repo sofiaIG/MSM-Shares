@@ -16,9 +16,8 @@ const NewShareForm = ({addShare}) => {
             numberShares
         }
         addShare(shares);
-        postShares(shares);
-        // setName('');
-        // setNumberShares(0)
+        setName('');
+        setNumberShares(0)
 
     }
 
@@ -27,12 +26,12 @@ const NewShareForm = ({addShare}) => {
             <h2>Add a share</h2>
             <div>
                 <label htmlFor='name'>Name of the Company: </label>
-                <input onChange={handleName} value ={name} type = 'text' id = 'name'/>
+                <input onChange={handleName} value ={name} type = 'text' id = 'name' required/>
             </div>
             <div>
                 <label htmlFor='number-of-shares'>Number of Shares: </label>
                 <input onChange={handleShares} value ={numberShares} type = 'number' min = '1'
-                max = '50' id = 'number-of-shares'/>
+                max = '50' id = 'number-of-shares' required/>
             </div>
             <button type="submit"  id="save">Save</button>
         </form>

@@ -3,7 +3,6 @@ import React,{useState} from 'react';
 
 const TotalValue = ({shareNames, shares}) => {
 
-    const [totalVal, setTotalVal] = useState(null)
 
     const totalValueOverall = () => {
         let runningTotal = 0;
@@ -16,7 +15,7 @@ const TotalValue = ({shareNames, shares}) => {
                 }
             })
         })
-
+        
         return runningTotal;;
     }
 
