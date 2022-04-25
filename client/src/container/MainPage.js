@@ -10,7 +10,18 @@ const MainPage =({formClicked})=>{
 
     const [shares, setShares] = useState([]);
     const [shareClicked, setShareClicked] = useState(false);
-    const [selectedShare, setSelectedShare] = useState(null)
+    const [selectedShare, setSelectedShare] = useState(null);
+    const [apiData, setApiData] = useState([]);
+
+
+    useEffect(()=>{
+        const fetchPrices = async () =>{
+            const res = await fetch("https://api.coincap.io/v2/assets/{{id}}/history");
+            const data = await res.json();
+            setApiData(data);
+        }
+        fetchPrices()
+    }, [])
 
     useEffect(()=>{
         getShares().then((allShares)=>{
@@ -40,6 +51,8 @@ const MainPage =({formClicked})=>{
 
     return (
         <div className="main-page">
+
+
 
             { formClicked ? <NewShareForm addShare = {addShare}/> : null}
             <SharesList shares = {shares} handleShareClicked={handleShareClicked} />
