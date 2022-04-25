@@ -16,7 +16,7 @@ const MainPage =({formClicked})=>{
 
     useEffect(()=>{
         const fetchPrices = async () =>{
-            const res = await fetch("https://api.coincap.io/v2/assets/{{id}}/history");
+            const res = await fetch("https://api.coincap.io/v2/assets");
             const data = await res.json();
             setApiData(data);
         }
