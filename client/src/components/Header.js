@@ -6,8 +6,8 @@ const Header = ({handleFormClick}) => {
 
     return (
         <div className='header'>
-            <h2>I am Header</h2>
             <NewShare handleFormClick={handleFormClick}/>
+            <h2>I am Header</h2>
         </div>
     );
 }
