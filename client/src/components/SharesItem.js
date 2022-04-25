@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SharesItem = ({share, index, handleShareClicked}) => {
+const SharesItem = ({share, handleShareClicked}) => {
 
     const handleClick = () => {
         handleShareClicked(share);

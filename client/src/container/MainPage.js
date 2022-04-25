@@ -8,24 +8,41 @@ import SharesShow from "../components/SharesShow";
 
 const MainPage =({formClicked})=>{
 
-    const [shares, setShares] = useState([]);
+    const [shares, setShares] = useState(null);
     const [shareClicked, setShareClicked] = useState(false);
     const [selectedShare, setSelectedShare] = useState(null);
-    const [shareNames, setShareNames] = useState(null)
-    const [shareHistory, setshareHistory] = useState([])
+    const [shareNames, setShareNames] = useState(null);
+    const [shareHistory, setShareHistory] = useState(null);
+    const [shareDataLoaded, setloaded] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
 
     useEffect(()=>{
-        getShares().then((savedShares)=>{
-            setShareNames(savedShares);
-        })
+        fetchFromDatabase();
+        setTimeout(()=>{
+            setIsLoading(false)
+        }, 2000)
     }, [])
 
+    const fetchFromDatabase = () => {
+        fetch('http://localhost:9000/api/shares')
+        .then(res => res.json())
+        .then(data => setShareNames(data));
+    }
+
     useEffect(() => {
-        if (shareNames) {
-        loadShareData(getShareNames());
+        if (shareNames != null) {
+        setShares(loadShareData(getShareNames()));
+        // setShareHistory(loadShareHistory(getShareNames()));
         }
     }, [shareNames])
+
+    useEffect(() => {
+        if (shares != null) {
+            setloaded(true);
+        }
+    }, [shares])
+
 
     const getShareNames = () => {
         let sharesMapped = shareNames.map((object) => {
@@ -35,21 +52,34 @@ const MainPage =({formClicked})=>{
     }
 
     const loadShareData = (names) => {
-        let shareData = []
-        let shareHistory = []
+        let shareData = [];
+        
+
         names.forEach((name) => {
-            fetch(`https://api.coincap.io/v2/assets/${name}/history?interval=m30`)
-            .then(res => res.json())
-            .then(data => shareHistory.push(data));
+            fetchSharesJSON(name).then(data => shareData.push(data));
+        });
 
-            fetch(`https://api.coincap.io/v2/assets/${name}`)
-            .then(res => res.json())
-            .then(data => shareData.push(data));
-        })
+        return shareData;
+    }
 
-        setshareHistory(shareHistory)
-        setShares(shareData)
+    const loadShareHistory = (names) => {
+        let shareHistoryData = [];
+        names.forEach((name) => {
+            fetchShareHistroyJSON(name).then(data => shareHistory.push(data))
+        });
+        return shareHistoryData;
+    }
 
+    const fetchShareHistroyJSON = async (name) => {
+        const response = await fetch(`https://api.coincap.io/v2/assets/${name}/history?interval=m30`);
+        const theShareHistory = await response.json();
+        return theShareHistory;
+    }
+
+    const fetchSharesJSON = async (name) => {
+        const response = await fetch(`https://api.coincap.io/v2/assets/${name}`);
+        const theShareData = await response.json();
+        return theShareData;
     }
 
     const addShare =(share) =>{
@@ -75,9 +105,9 @@ const MainPage =({formClicked})=>{
     return (
         <div className="main-page">
             { formClicked ? <NewShareForm addShare = {addShare}/> : null}
-            <SharesList shares = {shares} handleShareClicked={handleShareClicked} />
+            {shareDataLoaded ? <SharesList shares = {shares} handleShareClicked={handleShareClicked} />: null}
             <SharesShow share={selectedShare} clicked={shareClicked} removeShare={removeShare} setClicked={setShareClicked}/>
-    </div>
+        </div>
    
 
     )
