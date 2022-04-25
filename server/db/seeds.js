@@ -8,7 +8,7 @@ db.shares.insertMany([
     },
     {
         name : "polygon",
-        shares_held : 3
+        shares_held : 10
     },
     {
         name : "xrp",

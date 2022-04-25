@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import NewShareForm from "../components/NewShareForm";
 import SharesList from "../components/SharesList";
 import SharesShow from "../components/SharesShow";
+import TotalValue from "../components/TotalValue";
 
 
 const MainPage =({formClicked})=>{
@@ -107,6 +108,7 @@ const MainPage =({formClicked})=>{
             { formClicked ? <NewShareForm addShare = {addShare}/> : null}
             {shareDataLoaded ? <SharesList shares = {shares} handleShareClicked={handleShareClicked} />: null}
             <SharesShow share={selectedShare} clicked={shareClicked} removeShare={removeShare} setClicked={setShareClicked}/>
+            {shareDataLoaded ? <TotalValue shareNames={shareNames} shares={shares} /> : null}
         </div>
    
 
