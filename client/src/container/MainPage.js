@@ -5,6 +5,7 @@ import NewShareForm from "../components/NewShareForm";
 import SharesList from "../components/SharesList";
 import SharesShow from "../components/SharesShow";
 import TotalValue from "../components/TotalValue";
+import DisplayAll from "../components/DisplayAll";
 
 
 const MainPage =({formClicked})=>{
@@ -14,10 +15,13 @@ const MainPage =({formClicked})=>{
     const [selectedShare, setSelectedShare] = useState(null);
     const [shareNames, setShareNames] = useState(null);
     const [shareHistory, setShareHistory] = useState(null);
-    const [shareDataLoaded, setloaded] = useState(false);
+    const [shareDataLoaded, setLoaded] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [allData, setAllData] = useState([]);
 
 
+   
+    
     useEffect(()=>{
         fetchFromDatabase();
         setTimeout(()=>{
@@ -38,9 +42,13 @@ const MainPage =({formClicked})=>{
         }
     }, [shareNames])
 
+    useEffect(()=>{
+        fetchPrices();
+    }, [])
+
     useEffect(() => {
         if (shares != null) {
-            setloaded(true);
+            setLoaded(true);
         }
     }, [shares])
 
@@ -69,6 +77,12 @@ const MainPage =({formClicked})=>{
             fetchShareHistroyJSON(name).then(data => shareHistory.push(data))
         });
         return shareHistoryData;
+    }
+
+    const fetchPrices = () => {
+            fetch("https://api.coincap.io/v2/assets/")
+            .then(res => res.json())
+            .then(data =>(setAllData(data)))
     }
 
     const fetchShareHistroyJSON = async (name) => {
@@ -103,12 +117,20 @@ const MainPage =({formClicked})=>{
         setShareClicked(true);
     }
 
+    // const handle
+
+
+
     return (
         <div className="main-page">
             { formClicked ? <NewShareForm addShare = {addShare}/> : null}
             {shareDataLoaded ? <SharesList shares = {shares} handleShareClicked={handleShareClicked} />: null}
             <SharesShow share={selectedShare} clicked={shareClicked} removeShare={removeShare} setClicked={setShareClicked}/>
             {shareDataLoaded ? <TotalValue shareNames={shareNames} shares={shares} /> : null}
+            {shareDataLoaded ? <DisplayAll data={allData} /> : null}
+            {/* {console.log('this one', allData)} */}
+            
+            
         </div>
    
 
