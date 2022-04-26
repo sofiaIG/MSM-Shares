@@ -2,8 +2,7 @@ import React from 'react';
 import {Line} from 'react-chartjs-2';
 import {Chart as ChartJS} from 'chart.js/auto';
 
-const SharesDetail = ({share, removeShare, setClicked, shareHistory}) => {
-
+const SharesDetail = ({share, removeShare, setClicked, findShareInDBfromShares, shareHistory}) => {
     const newShare = () =>{
         let newShareHistory ;
         shareHistory.forEach((object) =>{
@@ -12,43 +11,33 @@ const SharesDetail = ({share, removeShare, setClicked, shareHistory}) => {
                 return 
         }
     }) 
-    // console.log(newShareHistory);
     return newShareHistory;
     }
-    // console.log(newShare);
-
     const thisShareHistroy = newShare();
-    // console.log(thisShareHistroy);
-    // const name = thisShareHistroy.data.name
-    // console.log({name});
     const shareData = thisShareHistroy[share.data.id]
-    // console.log(shareData);
-    // console.log(shareData.data);
-
-    // useing map for  price and time   
 
     const newArrayWithPrice = (shareData.data).map((object) =>{
         return object.priceUsd
     })
-    // console.log(newArrayWithTime);
 
     const newArrayWithTime = (shareData.data).map((object) =>{
         return object.date
     })
+      const shareInDatabase=findShareInDBfromShares(share);
 
+    const totValueOfShare = () => {
+        return share.data.priceUsd * shareInDatabase.shares_held;
+    }
+    
     const sliceTime = newArrayWithTime.slice(0,30);
     const slicePrice = newArrayWithPrice.slice(0,30);
-    // console.log(newArrayWithTime);
 
-// console log this see whats get back from it 
     const handleDelete = () => {
-        removeShare(share._id);
+        removeShare(share);
         setClicked(false);
     }
     const xlabel = sliceTime;
     const ylabel = slicePrice;
-
-    // console.log(xlabel);
 
     const state = {
         labels: xlabel,
@@ -64,6 +53,9 @@ const SharesDetail = ({share, removeShare, setClicked, shareHistory}) => {
             }
         ]
         }
+
+    const totalVal = totValueOfShare();
+
 
     return (
         <div className='share-detail'>
@@ -87,9 +79,8 @@ const SharesDetail = ({share, removeShare, setClicked, shareHistory}) => {
             <p><strong>Name: </strong>{share.data.name}</p>
             <p><strong>Symbol: </strong>{share.data.symbol}</p>
             <p><strong>Price: </strong>{share.data.priceUsd}</p>
-            <p>Profit: </p>
-            <p>Shares held: </p>
-            </div>
+            <p><strong>Shares held: </strong>{shareInDatabase.shares_held}</p>
+            <p><strong>Total Value of Share Held: ${totalVal.toFixed(2)}</strong></p>
             <button onClick={handleDelete}>Sell</button>
         </div>
     );
