@@ -169,11 +169,6 @@ const MainPage =({formClicked})=>{
             {shareDataLoaded ? <TotalValue shareNames={shareNames} shares={shares} /> : null}
             
         </div>
-        <br></br>
-        <div>
-        <MainChart />
-        </div>
-        <br></br>
         </>
 
     )
