@@ -34,7 +34,7 @@ const MainPage =({formClicked})=>{
     useEffect(() => {
         if (shareNames != null) {
         setShares(loadShareData(getShareNames()));
-        // setShareHistory(loadShareHistory(getShareNames()));
+        setShareHistory(loadShareHistory(getShareNames()));
         }
     }, [shareNames])
 
@@ -66,7 +66,7 @@ const MainPage =({formClicked})=>{
     const loadShareHistory = (names) => {
         let shareHistoryData = [];
         names.forEach((name) => {
-            fetchShareHistroyJSON(name).then(data => shareHistory.push(data))
+            fetchShareHistroyJSON(name).then(data => shareHistoryData.push(data))
         });
         return shareHistoryData;
     }
