@@ -35,7 +35,7 @@ const MainPage =({formClicked})=>{
     useEffect(() => {
         if (shareNames != null) {
         setShares(loadShareData(getShareNames()));
-        // setShareHistory(loadShareHistory(getShareNames()));
+        setShareHistory(loadShareHistory(getShareNames()));
         }
     }, [shareNames])
 
@@ -66,11 +66,20 @@ const MainPage =({formClicked})=>{
 
     const loadShareHistory = (names) => {
         let shareHistoryData = [];
+
         names.forEach((name) => {
-            fetchShareHistroyJSON(name).then(data => shareHistory.push(data))
+            fetchShareHistroyJSON(name).then(data => shareHistoryData.push(restructureToObject(name, data)))
         });
         return shareHistoryData;
     }
+    // old version
+    // const loadShareHistory = (names) => {
+    //     let shareHistoryData = [];
+    //     names.forEach((name) => {
+    //         fetchShareHistroyJSON(name).then(data => shareHistoryData.push(data))
+    //     });
+    //     return shareHistoryData;
+    // }
     
 
     const fetchShareHistroyJSON = async (name) => {
@@ -85,6 +94,12 @@ const MainPage =({formClicked})=>{
         return theShareData;
     }
 
+    const restructureToObject = (inputName, data) => {
+        const lobject = {};
+        lobject[inputName] = data;
+        return lobject
+    }
+    
     const addShare =(share) =>{
         const temp = shares.map(s=>s);
         temp.push(share);
@@ -110,7 +125,7 @@ const MainPage =({formClicked})=>{
          <div className="main-page">
             { formClicked ? <NewShareForm addShare = {addShare}/> : null}
             {shareDataLoaded ? <SharesList shares = {shares} handleShareClicked={handleShareClicked} />: null}
-            <SharesShow share={selectedShare} clicked={shareClicked} removeShare={removeShare} setClicked={setShareClicked}/>
+            <SharesShow share={selectedShare} clicked={shareClicked} removeShare={removeShare} setClicked={setShareClicked} shareHistory = {shareHistory}/>
             {shareDataLoaded ? <TotalValue shareNames={shareNames} shares={shares} /> : null}
         </div>
         <br></br>

@@ -2,17 +2,56 @@ import React from 'react';
 import {Line} from 'react-chartjs-2';
 import {Chart as ChartJS} from 'chart.js/auto';
 
-const SharesDetail = ({share, removeShare, setClicked}) => {
+const SharesDetail = ({share, removeShare, setClicked, shareHistory}) => {
 
+    const newShare = () =>{
+        let newShareHistory ;
+        shareHistory.forEach((object) =>{
+            if (Object.keys(object)[0] == share.data.id) {
+                newShareHistory = object;
+                return 
+        }
+    }) 
+    // console.log(newShareHistory);
+    return newShareHistory;
+    }
+    // console.log(newShare);
+
+    const thisShareHistroy = newShare();
+    // console.log(thisShareHistroy);
+    // const name = thisShareHistroy.data.name
+    // console.log({name});
+    const shareData = thisShareHistroy[share.data.id]
+    // console.log(shareData);
+    // console.log(shareData.data);
+
+    // useing map for  price and time   
+
+    const newArrayWithPrice = (shareData.data).map((object) =>{
+        return object.priceUsd
+    })
+    // console.log(newArrayWithTime);
+
+    const newArrayWithTime = (shareData.data).map((object) =>{
+        return object.date
+    })
+
+    const sliceTime = newArrayWithTime.slice(0,30);
+    const slicePrice = newArrayWithPrice.slice(0,30);
+    // console.log(newArrayWithTime);
+
+// console log this see whats get back from it 
     const handleDelete = () => {
         removeShare(share._id);
         setClicked(false);
     }
-    const xlabels = [0, share.data.date];
-    const ylabel = [share.data.priceUsd];
+    const xlabel = sliceTime;
+    const ylabel = slicePrice;
+
+    // console.log(xlabel);
 
     const state = {
-        labels: xlabels,
+        labels: xlabel,
         datasets: [
             {
             label: [share.data.name],
@@ -29,13 +68,6 @@ const SharesDetail = ({share, removeShare, setClicked}) => {
     return (
         <div className='share-detail'>
             <div>
-            <h4>GRAPH</h4>
-            <p><strong>Name: </strong>{share.data.name}</p>
-            <p><strong>Symbol: </strong>{share.data.symbol}</p>
-            <p><strong>Price: </strong>{share.data.priceUsd}</p>
-            <p>Profit: </p>
-            <p>Shares held: </p>
-            </div>
             <div>
             <Line
             data={state}
@@ -52,7 +84,12 @@ const SharesDetail = ({share, removeShare, setClicked}) => {
             }}
             />
         </div>
-    
+            <p><strong>Name: </strong>{share.data.name}</p>
+            <p><strong>Symbol: </strong>{share.data.symbol}</p>
+            <p><strong>Price: </strong>{share.data.priceUsd}</p>
+            <p>Profit: </p>
+            <p>Shares held: </p>
+            </div>
             <button onClick={handleDelete}>Sell</button>
         </div>
     );
