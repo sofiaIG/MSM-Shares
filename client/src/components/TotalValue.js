@@ -16,7 +16,7 @@ const TotalValue = ({shareNames, shares}) => {
             })
         })
         
-        return runningTotal;;
+        return Math.round(runningTotal);
     }
 
     const totalValuee = totalValueOverall();
@@ -24,7 +24,7 @@ const TotalValue = ({shareNames, shares}) => {
 
     return (
         <>
-            <h3>Total Value Your Shares: ${totalValuee}</h3>
+            <h3>Total Value Your Shares: ${totalValuee.toFixed(2)}</h3>
         </>
 
     );

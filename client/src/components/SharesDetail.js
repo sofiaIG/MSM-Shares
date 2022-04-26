@@ -24,7 +24,7 @@ const SharesDetail = ({share, removeShare, setClicked, findShareInDBfromShares})
             <p><strong>Symbol: </strong>{share.data.symbol}</p>
             <p><strong>Price: </strong>{share.data.priceUsd}</p>
             <p><strong>Shares held: </strong>{shareInDatabase.shares_held}</p>
-            <p><strong>Total Value of Share Held: {totalVal}</strong></p>
+            <p><strong>Total Value of Share Held: ${totalVal.toFixed(2)}</strong></p>
             <button onClick={handleDelete}>Sell</button>
         </div>
     );
