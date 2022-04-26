@@ -85,7 +85,7 @@ const MainPage =({formClicked})=>{
 
     const addShare =(share) =>{
         const tempShareNames = shareNames.map(s=>s);
-        tempShareNames.push(share);
+        tempShareNames.push(restructureNewShare(share));
         setShareNames(tempShareNames);
         const tempShares = shares.map(s=>s);
         fetchSharesJSON(share.name).then(data => tempShares.push(data));
@@ -93,10 +93,11 @@ const MainPage =({formClicked})=>{
         postShares(share)
     }
 
-    // const restructureNewShare = (share) => {
-    //     let newSharesHeld = parseInt(share.shares_held);
-    //     return {name: share.name, shares_held: newSharesHeld}
-    // }
+    const restructureNewShare = (share) => {
+        console.log(share.shares_held);
+        let newSharesHeld = parseFloat(share.shares_held);
+        return {name: share.name, shares_held: newSharesHeld}
+    }
 
     const removeShare = (id) =>{
         const temp = shares.map(s=>s);
