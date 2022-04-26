@@ -16,13 +16,14 @@ const MainPage =({formClicked})=>{
     const [shareHistory, setShareHistory] = useState(null);
     const [shareDataLoaded, setLoaded] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    const [allData, setAllData] = useState([]);
+    const [allData, setAllData] = useState(null);
 
 
    
     
     useEffect(()=>{
         fetchFromDatabase();
+        fetchPrices();
         setTimeout(()=>{
             setIsLoading(false)
         }, 2000)
@@ -41,9 +42,9 @@ const MainPage =({formClicked})=>{
         }
     }, [shareNames])
 
-    useEffect(()=>{
-        fetchPrices();
-    }, [])
+    // useEffect(()=>{
+    //     fetchPrices();
+    // }, [])
 
     useEffect(() => {
         if (shares != null) {
@@ -107,7 +108,7 @@ const MainPage =({formClicked})=>{
 
         let fetchSuccess = false;
 
-        setloaded(false);
+        setLoaded(false);
         const tempShareNames = shareNames.map(s=>s);
         tempShareNames.push(restructureNewShare(share));
         setShareNames(tempShareNames);
@@ -156,20 +157,16 @@ const MainPage =({formClicked})=>{
         setShareClicked(true);
     }
 
-    // const handle
-
 
 
     return (
         <>
          <div className="main-page">
             { formClicked ? <NewShareForm addShare = {addShare}/> : null}
+            { formClicked ? <DisplayAll data={allData} /> : null}
             {shareDataLoaded ? <SharesList shares = {shares} handleShareClicked={handleShareClicked} />: null}
             <SharesShow share={selectedShare} clicked={shareClicked} removeShare={removeShare} setClicked={setShareClicked} findShareInDBfromShares={findShareInDBfromShares} shareHistory = {shareHistory}/>
             {shareDataLoaded ? <TotalValue shareNames={shareNames} shares={shares} /> : null}
-            {shareDataLoaded ? <DisplayAll data={allData} /> : null}
-            {/* {console.log('this one', allData)} */}
-            
             
         </div>
         <br></br>
