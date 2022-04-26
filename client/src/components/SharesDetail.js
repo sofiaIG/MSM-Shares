@@ -23,7 +23,7 @@ const SharesDetail = ({share, removeShare, setClicked, findShareInDBfromShares, 
     const newArrayWithTime = (shareData.data).map((object) =>{
         return object.date
     })
-      const shareInDatabase=findShareInDBfromShares(share);
+    const shareInDatabase=findShareInDBfromShares(share);
 
     const totValueOfShare = () => {
         return share.data.priceUsd * shareInDatabase.shares_held;

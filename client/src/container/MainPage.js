@@ -114,10 +114,10 @@ const MainPage =({formClicked})=>{
             fetchSuccess = true;
         }).catch(err => alert(err));
 
-        if (fetchSuccess == true){
+        // if (fetchSuccess == true){
         setShares(tempShares);
         postShares(share);
-        }
+        // }
     }
 
     const restructureNewShare = (share) => {
@@ -160,19 +160,21 @@ const MainPage =({formClicked})=>{
     return (
         <>
         <div className="main-page">
-            { formClicked ? <NewShareForm addShare = {addShare}/> : null}
             {shareDataLoaded ? <SharesList shares = {shares} handleShareClicked={handleShareClicked} />: null}
             <SharesShow share={selectedShare} clicked={shareClicked} removeShare={removeShare} setClicked={setShareClicked} findShareInDBfromShares={findShareInDBfromShares} shareHistory = {shareHistory}/>
-            {shareDataLoaded ? <TotalValue shareNames={shareNames} shares={shares} /> : null}
-            {shareDataLoaded ? <DisplayAll data={allData} /> : null}
             {/* {console.log('this one', allData)} */}
-            
             
         </div>
         <br></br>
         <div>
+        {shareDataLoaded ? <TotalValue shareNames={shareNames} shares={shares} /> : null}
         </div>
         <br></br>
+        <div>
+        { formClicked ? <NewShareForm addShare = {addShare}/> : null}
+        <br></br>
+        {formClicked ? <DisplayAll data={allData} /> : null}
+        </div>
         </>
 
     )
