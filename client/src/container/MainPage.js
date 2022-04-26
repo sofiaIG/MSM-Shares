@@ -66,8 +66,10 @@ const MainPage =({formClicked})=>{
         let shareHistoryData = [];
 
         names.forEach((name) => {
-            fetchShareHistroyJSON(name).then(data => shareHistoryData.push(data))
+            fetchShareHistroyJSON(name).then(data => shareHistoryData.push(restructureToObject(name, data)))
         });
+
+        console.log(shareHistoryData)
         return shareHistoryData;
     }
 
@@ -83,7 +85,14 @@ const MainPage =({formClicked})=>{
         return theShareData;
     }
 
+    const restructureToObject = (inputName, data) => {
+        const lobject = {};
+        lobject[inputName] = data;
+        return lobject
+    }
+
     const addShare =(share) =>{
+        setloaded(false);
         const tempShareNames = shareNames.map(s=>s);
         tempShareNames.push(restructureNewShare(share));
         setShareNames(tempShareNames);
