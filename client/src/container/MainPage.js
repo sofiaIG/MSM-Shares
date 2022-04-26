@@ -99,14 +99,27 @@ const MainPage =({formClicked})=>{
         return {name: share.name, shares_held: newSharesHeld}
     }
 
-    const removeShare = (id) =>{
+    const removeShare = (share) =>{
         const temp = shares.map(s=>s);
-        const indexToDel =  temp.map(s=>s._id).indexOf(id);
-        temp.splice(indexToDel, 1);
+        const indexToDel = temp.indexOf(share)
+        temp.splice(indexToDel, 1)
         setShares(temp);
-        deleteShares(id)
-
+        const databaseShare = findShareInDBfromShares(share);
+        deleteShares(databaseShare._id);
     }
+
+    const findShareInDBfromShares = (share) => {
+        let foundShare;
+
+        shareNames.forEach( (shareObject) => { 
+            if (share.data.id == shareObject.name) {
+                foundShare = shareObject
+                return
+            }})
+        
+        return foundShare;
+    }
+    
 
     const handleShareClicked = (share) => {
         setSelectedShare(share);

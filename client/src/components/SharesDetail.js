@@ -4,7 +4,7 @@ import React from 'react';
 const SharesDetail = ({share, removeShare, setClicked}) => {
 
     const handleDelete = () => {
-        removeShare(share._id);
+        removeShare(share);
         setClicked(false);
     }
 
