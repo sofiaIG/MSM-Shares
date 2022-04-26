@@ -5,6 +5,7 @@ import NewShareForm from "../components/NewShareForm";
 import SharesList from "../components/SharesList";
 import SharesShow from "../components/SharesShow";
 import TotalValue from "../components/TotalValue";
+import MainChart from "../components/MainChart";
 
 
 const MainPage =({formClicked})=>{
@@ -70,9 +71,10 @@ const MainPage =({formClicked})=>{
         });
         return shareHistoryData;
     }
+    
 
     const fetchShareHistroyJSON = async (name) => {
-        const response = await fetch(`https://api.coincap.io/v2/assets/${name}/history?interval=m30`);
+        const response = await fetch(`https://api.coincap.io/v2/assets/${name}/history?interval=m15`);
         const theShareHistory = await response.json();
         return theShareHistory;
     }
@@ -104,13 +106,19 @@ const MainPage =({formClicked})=>{
     }
 
     return (
-        <div className="main-page">
+        <>
+         <div className="main-page">
             { formClicked ? <NewShareForm addShare = {addShare}/> : null}
             {shareDataLoaded ? <SharesList shares = {shares} handleShareClicked={handleShareClicked} />: null}
             <SharesShow share={selectedShare} clicked={shareClicked} removeShare={removeShare} setClicked={setShareClicked}/>
             {shareDataLoaded ? <TotalValue shareNames={shareNames} shares={shares} /> : null}
         </div>
-   
+        <br></br>
+        <div>
+        <MainChart />
+        </div>
+        <br></br>
+        </>
 
     )
 }
