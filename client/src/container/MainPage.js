@@ -68,7 +68,6 @@ const MainPage =({formClicked})=>{
         names.forEach((name) => {
             fetchShareHistroyJSON(name).then(data => shareHistoryData.push(restructureToObject(name, data)))
         });
-
         console.log(shareHistoryData)
         return shareHistoryData;
     }
@@ -92,14 +91,23 @@ const MainPage =({formClicked})=>{
     }
 
     const addShare =(share) =>{
+
+        let fetchSuccess = false;
+
         setloaded(false);
         const tempShareNames = shareNames.map(s=>s);
         tempShareNames.push(restructureNewShare(share));
         setShareNames(tempShareNames);
         const tempShares = shares.map(s=>s);
-        fetchSharesJSON(share.name).then(data => tempShares.push(data));
+        fetchSharesJSON(share.name).then((data) => {
+            tempShares.push(data)
+            fetchSuccess = true;
+        }).catch(err => alert(err));
+
+        if (fetchSuccess == true){
         setShares(tempShares);
-        postShares(share)
+        postShares(share);
+        }
     }
 
     const restructureNewShare = (share) => {

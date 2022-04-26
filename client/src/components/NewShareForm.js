@@ -10,7 +10,7 @@ const NewShareForm = ({addShare}) => {
     const handleShares = event => setNumberShares(event.target.value)
 
     const handleSubmit =(event) =>{
-        event.preventDefault();
+        // event.preventDefault();
         const shares = {
             name,
             shares_held
@@ -18,7 +18,6 @@ const NewShareForm = ({addShare}) => {
         addShare(shares);
         setName('');
         setNumberShares(0)
-
     }
 
     return (
