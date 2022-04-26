@@ -1,5 +1,5 @@
 
-import { getShares, deleteShares } from "../components/SharesService";
+import { getShares, deleteShares, postShares } from "../components/SharesService";
 import React, { useState, useEffect } from 'react';
 import NewShareForm from "../components/NewShareForm";
 import SharesList from "../components/SharesList";
@@ -34,7 +34,7 @@ const MainPage =({formClicked})=>{
     useEffect(() => {
         if (shareNames != null) {
         setShares(loadShareData(getShareNames()));
-        // setShareHistory(loadShareHistory(getShareNames()));
+        setShareHistory(loadShareHistory(getShareNames()));
         }
     }, [shareNames])
 
@@ -55,7 +55,6 @@ const MainPage =({formClicked})=>{
     const loadShareData = (names) => {
         let shareData = [];
         
-
         names.forEach((name) => {
             fetchSharesJSON(name).then(data => shareData.push(data));
         });
@@ -65,8 +64,9 @@ const MainPage =({formClicked})=>{
 
     const loadShareHistory = (names) => {
         let shareHistoryData = [];
+
         names.forEach((name) => {
-            fetchShareHistroyJSON(name).then(data => shareHistory.push(data))
+            fetchShareHistroyJSON(name).then(data => shareHistoryData.push(data))
         });
         return shareHistoryData;
     }
@@ -84,19 +84,42 @@ const MainPage =({formClicked})=>{
     }
 
     const addShare =(share) =>{
-        const temp = shares.map(s=>s);
-        temp.push(share);
-        setShares(temp);
+        const tempShareNames = shareNames.map(s=>s);
+        tempShareNames.push(restructureNewShare(share));
+        setShareNames(tempShareNames);
+        const tempShares = shares.map(s=>s);
+        fetchSharesJSON(share.name).then(data => tempShares.push(data));
+        setShares(tempShares);
+        postShares(share)
     }
 
-    const removeShare = (id) =>{
-        const temp = shares.map(s=>s);
-        const indexToDel =  temp.map(s=>s._id).indexOf(id);
-        temp.splice(indexToDel, 1);
-        setShares(temp);
-        deleteShares(id)
-
+    const restructureNewShare = (share) => {
+        console.log(share.shares_held);
+        let newSharesHeld = parseFloat(share.shares_held);
+        return {name: share.name, shares_held: newSharesHeld}
     }
+
+    const removeShare = (share) =>{
+        const temp = shares.map(s=>s);
+        const indexToDel = temp.indexOf(share)
+        temp.splice(indexToDel, 1)
+        setShares(temp);
+        const databaseShare = findShareInDBfromShares(share);
+        deleteShares(databaseShare._id);
+    }
+
+    const findShareInDBfromShares = (share) => {
+        let foundShare;
+
+        shareNames.forEach( (shareObject) => { 
+            if (share.data.id == shareObject.name) {
+                foundShare = shareObject
+                return
+            }})
+        
+        return foundShare;
+    }
+    
 
     const handleShareClicked = (share) => {
         setSelectedShare(share);
@@ -107,7 +130,7 @@ const MainPage =({formClicked})=>{
         <div className="main-page">
             { formClicked ? <NewShareForm addShare = {addShare}/> : null}
             {shareDataLoaded ? <SharesList shares = {shares} handleShareClicked={handleShareClicked} />: null}
-            <SharesShow share={selectedShare} clicked={shareClicked} removeShare={removeShare} setClicked={setShareClicked}/>
+            <SharesShow share={selectedShare} clicked={shareClicked} removeShare={removeShare} setClicked={setShareClicked} findShareInDBfromShares={findShareInDBfromShares}/>
             {shareDataLoaded ? <TotalValue shareNames={shareNames} shares={shares} /> : null}
         </div>
    

@@ -4,7 +4,7 @@ import { postShares } from '../components/SharesService';
 
 const NewShareForm = ({addShare}) => {
     const [name, setName] = useState('');
-    const [numberShares, setNumberShares] = useState(0)
+    const [shares_held, setNumberShares] = useState(0)
 
     const handleName =event => setName(event.target.value);
     const handleShares = event => setNumberShares(event.target.value)
@@ -13,12 +13,11 @@ const NewShareForm = ({addShare}) => {
         event.preventDefault();
         const shares = {
             name,
-            numberShares
+            shares_held
         }
         addShare(shares);
-        postShares(shares);
-        // setName('');
-        // setNumberShares(0)
+        setName('');
+        setNumberShares(0)
 
     }
 
@@ -27,12 +26,12 @@ const NewShareForm = ({addShare}) => {
             <h2>Add a share</h2>
             <div>
                 <label htmlFor='name'>Name of the Company: </label>
-                <input onChange={handleName} value ={name} type = 'text' id = 'name'/>
+                <input onChange={handleName} value ={name} type = 'text' id = 'name' required/>
             </div>
             <div>
-                <label htmlFor='number-of-shares'>Number of Shares: </label>
-                <input onChange={handleShares} value ={numberShares} type = 'number' min = '1'
-                max = '50' id = 'number-of-shares'/>
+                <label htmlFor='shares_held'>Number of Shares: </label>
+                <input onChange={handleShares} value ={shares_held} type = 'number' min = '1'
+                max = '50' id = 'number-of-shares' required/>
             </div>
             <button type="submit"  id="save">Save</button>
         </form>
