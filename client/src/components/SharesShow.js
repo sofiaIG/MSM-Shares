@@ -2,12 +2,12 @@ import React from 'react';
 import OverallPerformance from './OverallPerformance';
 import SharesDetail from './SharesDetail';
 
-const SharesShow = ({share, clicked, removeShare, setClicked}) => {
-
+const SharesShow = ({share, clicked, removeShare, setClicked, findShareInDBfromShares, shareHistory}) => {
 
     return (
         <>
-            {clicked ? <SharesDetail share={share} removeShare={removeShare} setClicked={setClicked}/> : <OverallPerformance />}
+            {clicked ? <SharesDetail share={share} removeShare={removeShare} setClicked={setClicked} findShareInDBfromShares={findShareInDBfromShares} shareHistory = {shareHistory}/> : <OverallPerformance />}
+    
         </>
     );
 }
