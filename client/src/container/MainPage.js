@@ -7,7 +7,6 @@ import SharesShow from "../components/SharesShow";
 import TotalValue from "../components/TotalValue";
 import DisplayAll from "../components/DisplayAll";
 
-
 const MainPage =({formClicked})=>{
 
     const [shares, setShares] = useState(null);
@@ -79,7 +78,7 @@ const MainPage =({formClicked})=>{
         console.log(shareHistoryData)
         return shareHistoryData;
     }
-
+  
     const fetchPrices = () => {
             fetch("https://api.coincap.io/v2/assets/")
             .then(res => res.json())
@@ -87,7 +86,7 @@ const MainPage =({formClicked})=>{
     }
 
     const fetchShareHistroyJSON = async (name) => {
-        const response = await fetch(`https://api.coincap.io/v2/assets/${name}/history?interval=m30`);
+        const response = await fetch(`https://api.coincap.io/v2/assets/${name}/history?interval=m15`);
         const theShareHistory = await response.json();
         return theShareHistory;
     }
@@ -103,7 +102,7 @@ const MainPage =({formClicked})=>{
         lobject[inputName] = data;
         return lobject
     }
-
+    
     const addShare =(share) =>{
 
         let fetchSuccess = false;
@@ -162,17 +161,23 @@ const MainPage =({formClicked})=>{
 
 
     return (
-        <div className="main-page">
+        <>
+         <div className="main-page">
             { formClicked ? <NewShareForm addShare = {addShare}/> : null}
             {shareDataLoaded ? <SharesList shares = {shares} handleShareClicked={handleShareClicked} />: null}
-            <SharesShow share={selectedShare} clicked={shareClicked} removeShare={removeShare} setClicked={setShareClicked} findShareInDBfromShares={findShareInDBfromShares}/>
+            <SharesShow share={selectedShare} clicked={shareClicked} removeShare={removeShare} setClicked={setShareClicked} findShareInDBfromShares={findShareInDBfromShares} shareHistory = {shareHistory}/>
             {shareDataLoaded ? <TotalValue shareNames={shareNames} shares={shares} /> : null}
             {shareDataLoaded ? <DisplayAll data={allData} /> : null}
             {/* {console.log('this one', allData)} */}
             
             
         </div>
-   
+        <br></br>
+        <div>
+        <MainChart />
+        </div>
+        <br></br>
+        </>
 
     )
 }
