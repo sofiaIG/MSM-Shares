@@ -42,10 +42,6 @@ const MainPage =({formClicked})=>{
         }
     }, [shareNames])
 
-    // useEffect(()=>{
-    //     fetchPrices();
-    // }, [])
-
     useEffect(() => {
         if (shares != null) {
             setLoaded(true);
@@ -117,11 +113,8 @@ const MainPage =({formClicked})=>{
             tempShares.push(data)
             fetchSuccess = true;
         }).catch(err => alert(err));
-
-        if (fetchSuccess == true){
         setShares(tempShares);
         postShares(share);
-        }
     }
 
     const restructureNewShare = (share) => {

@@ -3,63 +3,63 @@ import {Line} from 'react-chartjs-2';
 import {Chart as ChartJS} from 'chart.js/auto';
 
 const SharesDetail = ({share, removeShare, setClicked, findShareInDBfromShares, shareHistory}) => {
-    // const newShare = () =>{
-    //     let newShareHistory ;
-    //     shareHistory.forEach((object) =>{
-    //         if (Object.keys(object)[0] == share.data.id) {
-    //             newShareHistory = object;
-    //             return 
-    //     }
-    // }) 
-    // return newShareHistory;
-    // }
-    // const thisShareHistroy = newShare();
-    // const shareData = thisShareHistroy[share.data.id]
+    const newShare = () =>{
+        let newShareHistory ;
+        shareHistory.forEach((object) =>{
+            if (Object.keys(object)[0] == share.data.id) {
+                newShareHistory = object;
+                return 
+        }
+    }) 
+    return newShareHistory;
+    }
+    const thisShareHistroy = newShare();
+    const shareData = thisShareHistroy[share.data.id]
 
-    // const newArrayWithPrice = (shareData.data).map((object) =>{
-    //     return object.priceUsd
-    // })
+    const newArrayWithPrice = (shareData.data).map((object) =>{
+        return object.priceUsd
+    })
 
-    // const newArrayWithTime = (shareData.data).map((object) =>{
-    //     return object.date
-    // })
+    const newArrayWithTime = (shareData.data).map((object) =>{
+        return object.date
+    })
     const shareInDatabase=findShareInDBfromShares(share);
 
     const totValueOfShare = () => {
         return share.data.priceUsd * shareInDatabase.shares_held;
     }
     
-    // const sliceTime = newArrayWithTime.slice(0,30);
-    // const slicePrice = newArrayWithPrice.slice(0,30);
+    const sliceTime = newArrayWithTime.slice(0,30);
+    const slicePrice = newArrayWithPrice.slice(0,30);
 
     const handleDelete = () => {
         removeShare(share);
         setClicked(false);
     }
-    // const xlabel = sliceTime;
-    // const ylabel = slicePrice;
+    const xlabel = sliceTime;
+    const ylabel = slicePrice;
 
-    // const state = {
-    //     labels: xlabel,
-    //     datasets: [
-    //         {
-    //         label: [share.data.name],
-    //         fill: false,
-    //         lineTension: 0.7,
-    //         backgroundColor: 'rgba(75,192,192,1)',
-    //         borderColor: 'rgba(0,0,0,1)',
-    //         borderWidth: 2,
-    //         data: ylabel
-    //         }
-    //     ]
-    //     }
+    const state = {
+        labels: xlabel,
+        datasets: [
+            {
+            label: [share.data.name],
+            fill: false,
+            lineTension: 0.7,
+            backgroundColor: 'rgba(75,192,192,1)',
+            borderColor: 'rgba(0,0,0,1)',
+            borderWidth: 2,
+            data: ylabel
+            }
+        ]
+        }
 
     const totalVal = totValueOfShare();
 
 
     return (
         <>
-        {/* <div className='share-detail'>
+        <div className='share-detail'>
             <Line
             data={state}
             options={{
@@ -74,7 +74,7 @@ const SharesDetail = ({share, removeShare, setClicked, findShareInDBfromShares, 
                 }
             }}
             />
-        </div> */}
+        </div>
         <div>
             <p><strong>Name: </strong>{share.data.name}</p>
             <p><strong>Symbol: </strong>{share.data.symbol}</p>
