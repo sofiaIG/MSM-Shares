@@ -197,6 +197,7 @@ const MainPage =({formClicked, handleFormClick})=>{
 
     return (
         <>
+
         <div className='new-share'>
         { formClicked ? <NewShareForm fetchNewShare={fetchNewShare} handleFormClick={handleFormClick}/> : null}
         <br></br>
