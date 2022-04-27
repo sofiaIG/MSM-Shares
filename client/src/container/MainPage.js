@@ -125,7 +125,7 @@ const MainPage =({formClicked, handleFormClick})=>{
 
     const fetchNewShare = (share) => {
 
-        let name = share.name;
+        const name = share.name;
 
         fetchSharesJSON(name)
         .then((data) => {
