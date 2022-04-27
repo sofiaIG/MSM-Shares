@@ -25,7 +25,7 @@ const DisplayAll = ({ data }) => {
         labels: newArrayWithName,
         datasets: [
             {
-                label: "Share data diagramm name by price",
+                label: "Name / Price in $",
                 fill: false,
                 lineTension: 0.7,
                 backgroundColor: 'rgba(75,192,192,1)',
@@ -48,7 +48,17 @@ const DisplayAll = ({ data }) => {
                             plugins: {
                                 title: {
                                     display: true,
-                                    text: ""
+                                    text: "All the Shares by price"
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    ticks: {
+                                        // Include a dollar sign in the ticks
+                                        callback: function(value, index, ticks) {
+                                            return  value + '$';
+                                        }
+                                    }
                                 }
                             }
                     }}
