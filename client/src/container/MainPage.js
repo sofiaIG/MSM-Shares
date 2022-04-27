@@ -151,6 +151,7 @@ const MainPage =({formClicked})=>{
 
     return (
         <>
+
         <div className='new-share'>
         { formClicked ? <NewShareForm addShare = {addShare}/> : null}
         <br></br>

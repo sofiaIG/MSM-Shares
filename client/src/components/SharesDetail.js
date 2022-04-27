@@ -38,7 +38,6 @@ const SharesDetail = ({share, removeShare, setClicked, findShareInDBfromShares, 
     }
     const xlabel = sliceTime;
     const ylabel = slicePrice;
-
     const state = {
         labels: xlabel,
         datasets: [
@@ -50,7 +49,6 @@ const SharesDetail = ({share, removeShare, setClicked, findShareInDBfromShares, 
             borderColor: 'rgba(0,0,0,1)',
             borderWidth: 1.5,
             data: ylabel,
-
             }
         ]
         }
@@ -60,9 +58,8 @@ const SharesDetail = ({share, removeShare, setClicked, findShareInDBfromShares, 
 
     return (
         <>
+        <div>
         <div className='share-detail'>
-                <div>        
-
             <Line
             data={state}
             width = {800}
