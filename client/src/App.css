@@ -2,7 +2,9 @@
  display: flex;
  /* text-align: center; */
  flex-direction: row;
- border: 1px solid black
+ border-top: 1px solid grey;
+ border-bottom: 1px solid grey;
+ padding: .5em;
 }
 
 .main-page {
@@ -11,7 +13,11 @@
     width: 100%;
 }
 
-  
+.new-share {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
 
 
 /* .App {

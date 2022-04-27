@@ -3,12 +3,12 @@ import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
 import DisplayDetail from "./DisplayDetail";
 
-const DisplayAll = ({ data }) => {
-    //   const allData = data.data.map(d=>d)
-    //   console.log( typeof allData)
-    const listOfShare = data.data
-    const shareList = listOfShare.map((share, index) => {
 
+const DisplayAll = ({data})=>{
+
+    const listOfShare = data.data
+
+    const shareList = listOfShare.map((share, index) => {
         return <DisplayDetail key={index} share={share} />
     });
 
@@ -18,8 +18,6 @@ const DisplayAll = ({ data }) => {
     const newArrayWithPrice = (listOfShare).map((object) => {
         return object.priceUsd
     })
-    
-    // console.log(newArrayWithPrice);
     
     const state = {
         labels: newArrayWithName,

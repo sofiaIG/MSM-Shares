@@ -2,7 +2,29 @@ import React from 'react';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
 
-const OverallPerformance = () => {
+const OverallPerformance = ({shareNames, shares}) => {
+
+    const getTotalOfShare = (totalHeld, sharePrice) => {
+        return parseFloat(totalHeld * sharePrice).toFixed(2);
+    }
+
+    const makeArrayOfTotalPrices = () => {
+
+        let array = []
+
+        shares.forEach((object) => {
+            shareNames.forEach((dbShare) => {
+                if (object.data.id === dbShare.name){
+                    let total = getTotalOfShare(dbShare.shares_held, object.data.priceUsd)
+                    let tempObject = {}
+                    tempObject[object.data.id] = total;
+                    array.push(tempObject);
+                }
+            })
+        })
+    }
+
+    const arrayOfPrices = makeArrayOfTotalPrices();
 
     const state = {
         labels: ['Bitcoin', 'Polygon', 'Tether'],
