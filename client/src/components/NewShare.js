@@ -1,4 +1,5 @@
 import React from 'react';
+import './NewShare.css';
 
 
 const NewShare = ({handleFormClick}) => {
@@ -9,7 +10,7 @@ const NewShare = ({handleFormClick}) => {
 
     return (
         <>
-            <button onClick={handleClick}>New Share</button>
+            <button  onClick={handleClick}>New Share</button>
         </>
     );
 }

@@ -39,9 +39,9 @@ const MainPage =({formClicked})=>{
         }
     }, [shareNames])
 
-    // useEffect(()=>{
-    //     fetchPrices();
-    // }, [])
+    useEffect(()=>{
+        fetchPrices();
+    }, [])
 
     useEffect(() => {
         if (shares != null) {
@@ -73,7 +73,6 @@ const MainPage =({formClicked})=>{
         names.forEach((name) => {
             fetchShareHistroyJSON(name).then(data => shareHistoryData.push(restructureToObject(name, data)))
         });
-        console.log(shareHistoryData)
         return shareHistoryData;
     }
     const fetchPrices = () => {
@@ -113,11 +112,9 @@ const MainPage =({formClicked})=>{
             tempShares.push(data)
             fetchSuccess = true;
         }).catch(err => alert(err));
-
-        if (fetchSuccess == true){
+      
         setShares(tempShares);
         postShares(share);
-        }
     }
 
     const restructureNewShare = (share) => {
@@ -125,7 +122,6 @@ const MainPage =({formClicked})=>{
         let newSharesHeld = parseFloat(share.shares_held);
         return {name: share.name, shares_held: newSharesHeld}
     }
-
     const removeShare = (share) =>{
         const temp = shares.map(s=>s);
         const indexToDel = temp.indexOf(share)
@@ -153,18 +149,22 @@ const MainPage =({formClicked})=>{
         setShareClicked(true);
     }
 
-
-
     return (
         <>
-        <div className="main-page">
-            { formClicked ? <NewShareForm addShare = {addShare}/> : null}
-            { formClicked ? <DisplayAll data={allData} /> : null}
-            {shareDataLoaded ? <SharesList shares = {shares} handleShareClicked={handleShareClicked} />: null}
-            <SharesShow share={selectedShare} clicked={shareClicked} removeShare={removeShare} setClicked={setShareClicked} findShareInDBfromShares={findShareInDBfromShares} shareHistory = {shareHistory}/>
-            {shareDataLoaded ? <TotalValue shareNames={shareNames} shares={shares} /> : null}
-            
+
+        <div className='new-share'>
+        { formClicked ? <NewShareForm addShare = {addShare}/> : null}
+        <br></br>
+        {formClicked ? <DisplayAll data={allData} /> : null}
         </div>
+        <div>
+        {shareDataLoaded ? <TotalValue shareNames={shareNames} shares={shares} /> : null}
+        </div>
+        <div className="main-page">
+            {shareDataLoaded ? <SharesList shares = {shares} handleShareClicked={handleShareClicked} />: null}
+            {shareDataLoaded ? <SharesShow share={selectedShare} clicked={shareClicked} removeShare={removeShare} setClicked={setShareClicked} findShareInDBfromShares={findShareInDBfromShares} shareHistory = {shareHistory} shareNames={shareNames} shares={shares}/> : null}
+        </div>
+        <br></br>
         </>
 
     )

@@ -43,13 +43,13 @@ const SharesDetail = ({share, removeShare, setClicked, findShareInDBfromShares, 
         labels: xlabel,
         datasets: [
             {
-            label: [share.data.name],
+            label: share.data.name,
             fill: false,
             lineTension: 0.7,
             backgroundColor: 'rgba(75,192,192,1)',
             borderColor: 'rgba(0,0,0,1)',
-            borderWidth: 2,
-            data: ylabel
+            borderWidth: 1.5,
+            data: ylabel,
             }
         ]
         }
@@ -59,27 +59,45 @@ const SharesDetail = ({share, removeShare, setClicked, findShareInDBfromShares, 
 
     return (
         <>
+        <div>
         <div className='share-detail'>
             <Line
             data={state}
+            width = {800}
+            height = {400}
             options={{
-                title:{
-                display:true,
-                text:'Average Title per month',
-                fontSize:20
-                },
-                legend:{
-                display:true,
-                position:'right'
+                plugins: {
+                    title: {
+                        display: true,
+                        text: `The ${share.data.name} chart`
+                    }
                 }
-            }}
+        }}
+
+            // options={{
+            //     options: {
+            //         plugins: {
+            //             title: {
+            //                 display: true,
+            //                 text: `The ${share.data.name} chart graph`
+            //             }
+            //         }
+            //     } 
+            // }}
             />
-            <p><strong>Name: </strong>{share.data.name}</p>
-            <p><strong>Symbol: </strong>{share.data.symbol}</p>
-            <p><strong>Price: </strong>{share.data.priceUsd}</p>
-            <p><strong>Shares held: </strong>{shareInDatabase.shares_held}</p>
-            <p><strong>Total Value of Share Held: ${totalVal.toFixed(2)}</strong></p>
-            <button onClick={handleDelete}>Sell</button>
+        </div>
+            <div className='details'>
+                <div className='detail-flex'>
+                    <p><strong>Name: </strong>{share.data.name}</p>
+                    <p><strong>Symbol: </strong>{share.data.symbol}</p>
+                </div>
+                    <div className='detail-flex'>
+                        <p><strong>Price: </strong>{share.data.priceUsd}</p>
+                        <p><strong>Shares held: </strong>{shareInDatabase.shares_held}</p>
+                    </div>
+                <p><strong>Total Value of Share Held: ${totalVal.toFixed(2)}</strong></p>
+                <button onClick={handleDelete} id='sell-button'>Sell</button>
+            </div>      
         </div>
         </>
     );

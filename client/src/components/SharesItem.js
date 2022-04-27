@@ -10,12 +10,10 @@ const SharesItem = ({share, handleShareClicked}) => {
     
     return(
         <div className = "shares-item" onClick={handleClick}>
-            <div>
             <p>Name: {share.data.name} </p>
             <p>Symbol: {share.data.symbol}</p>
             <p>Price: ${parseFloat(share.data.priceUsd).toFixed(2)}</p>
             <br></br>
-            </div>
         </div>
     );
 
