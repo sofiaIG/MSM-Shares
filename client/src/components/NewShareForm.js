@@ -12,14 +12,15 @@ const NewShareForm = ({fetchNewShare, handleFormClick}) => {
     
 
     const handleSubmit =(event) =>{
-        // event.preventDefault();
+        event.preventDefault();
         const shares = {
             name,
             shares_held
         }
         fetchNewShare(shares);
         setName('');
-        setNumberShares(0)
+        setNumberShares(0);
+        handleFormClick();
     }
 
     return (

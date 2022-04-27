@@ -34,8 +34,8 @@ const MainPage =({formClicked, handleFormClick})=>{
 
     useEffect(() => {
         if (shareNames != null) {
-            setShares(loadShareData(getShareNames()));
-            setShareHistory(loadShareHistory(getShareNames()));
+            loadShareData(getShareNames());
+            loadShareHistory(getShareNames());
         }
     }, [shareNames])
 
@@ -58,22 +58,39 @@ const MainPage =({formClicked, handleFormClick})=>{
     }
 
     const loadShareData = (names) => {
-        let shareData = [];
+        let allPromises = []
 
         names.forEach((name) => {
-            fetchSharesJSON(name).then(data => shareData.push(data));
+            allPromises.push(fetchSharesJSON(name));
         });
 
-        return shareData;
+        Promise.all(allPromises)
+            .then((values) => {
+                setShares(values)
+            })
+
+        // return shareData;
     }
 
     const loadShareHistory = (names) => {
-        let shareHistoryData = [];
+        let allPromises = [];
+        let arrayOfNames = [];
 
         names.forEach((name) => {
-            fetchShareHistroyJSON(name).then(data => shareHistoryData.push(restructureToObject(name, data)))
+            arrayOfNames.push(name);
+            allPromises.push(fetchShareHistroyJSON(name))
         });
-        return shareHistoryData;
+        
+        Promise.all(allPromises)
+            .then((values) => {
+                let newValuesArray = []
+                values.forEach((value, index) => {
+                    let newObject = {}
+                    newObject[arrayOfNames[index]] = value
+                    newValuesArray.push(newObject);
+                })
+                setShareHistory(newValuesArray);
+            })
     }
     const fetchPrices = () => {
             fetch("https://api.coincap.io/v2/assets/")
@@ -103,13 +120,17 @@ const MainPage =({formClicked, handleFormClick})=>{
 
         const tempShareNames = shareNames.map(s=>s);
         tempShareNames.push(restructureNewShare(share));
-        setShareNames(tempShareNames);
+       
 
         const tempShares = shares.map(s=>s);
         tempShares.push(shareData);
-        setShares(tempShares);
+        postShares(share)
+            .then(() => {
+                setShareNames(tempShareNames);
+                setShares(tempShares);
+                fetchFromDatabase();
+            });
 
-        postShares(share);
     }
 
     const addNewShareHistory = (shareData) => {
@@ -129,7 +150,9 @@ const MainPage =({formClicked, handleFormClick})=>{
 
         fetchSharesJSON(name)
         .then((data) => {
-            if (!data.error) {
+            console.log(data)
+            console.log(data.hasOwnProperty('error'))
+            if (!data.hasOwnProperty('error')) {
                 addShare(data, share)
             } else {
                 alert("Sorry, Couldn't find that crypto!")
@@ -139,7 +162,7 @@ const MainPage =({formClicked, handleFormClick})=>{
 
         fetchShareHistroyJSON(name)
         .then((data) => {
-            if (!data.error) {
+            if (!data.hasOwnProperty('error')) {
             addNewShareHistory(data) 
             } 
         }).catch(err => alert(err))
