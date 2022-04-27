@@ -4,6 +4,7 @@ import { Chart as ChartJS } from 'chart.js/auto';
 
 const OverallPerformance = ({shareNames, shares}) => {
 
+
     const getTotalOfShare = (totalHeld, sharePrice) => {
         return parseFloat(totalHeld * sharePrice).toFixed(2);
     }
@@ -22,12 +23,22 @@ const OverallPerformance = ({shareNames, shares}) => {
                 }
             })
         })
+
+        return array;
     }
 
-    const arrayOfPrices = makeArrayOfTotalPrices();
+    const arrayOfPriceObjects = makeArrayOfTotalPrices();
+
+    const arrayOfLabels = arrayOfPriceObjects.map((object) => {
+        return Object.keys(object)[0]
+    });
+
+    const arrayOfPrices = arrayOfPriceObjects.map((object)=> {
+        return Object.values(object)[0]
+    });
 
     const state = {
-        labels: ['Bitcoin', 'Polygon', 'Tether'],
+        labels: arrayOfLabels,
         datasets: [
         {
             label: 'Rainfall',
@@ -44,7 +55,7 @@ const OverallPerformance = ({shareNames, shares}) => {
             '#175000',
            
             ],
-            data: [77897.99, 32503.7, 15333 ]
+            data: arrayOfPrices
           }
         ]
       }
@@ -52,7 +63,7 @@ const OverallPerformance = ({shareNames, shares}) => {
 
     return (
         <div>
- <h3>Overall Performance</h3>
+            <h3>Overall Performance</h3>
             <div>
             <Pie
             data={state}
