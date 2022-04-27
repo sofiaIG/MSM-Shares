@@ -14,6 +14,7 @@ const SharesDetail = ({share, removeShare, setClicked, findShareInDBfromShares, 
     return newShareHistory;
     }
     const thisShareHistroy = newShare();
+    console.log(thisShareHistroy)
     const shareData = thisShareHistroy[share.data.id]
 
     const newArrayWithPrice = (shareData.data).map((object) =>{

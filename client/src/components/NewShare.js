@@ -9,9 +9,8 @@ const NewShare = ({handleFormClick}) => {
     }
 
     return (
-        <>
-            <button  onClick={handleClick}>New Share</button>
-        </>
+       
+        <button  onClick={handleClick}>New Share</button>
     );
 }
 

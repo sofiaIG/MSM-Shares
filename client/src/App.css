@@ -18,6 +18,21 @@
   display: flex;
   justify-content: space-evenly;
 }
+/* .item{
+  margin-right: 40px;
+} */
+
+.header{
+  display:flex;
+  align-items: center;
+  margin-top: 25px;
+  margin-left:114px;
+}
+
+.h2{
+  text-align: center;
+  margin: auto;
+}
 
 
 /* .App {
