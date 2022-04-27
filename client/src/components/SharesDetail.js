@@ -88,13 +88,17 @@ const SharesDetail = ({share, removeShare, setClicked, findShareInDBfromShares, 
             // }}
             />
         </div>
-            <div>
-            <p><strong>Name: </strong>{share.data.name}</p>
-            <p><strong>Symbol: </strong>{share.data.symbol}</p>
-            <p><strong>Price: </strong>{share.data.priceUsd}</p>
-            <p><strong>Shares held: </strong>{shareInDatabase.shares_held}</p>
-            <p><strong>Total Value of Share Held: ${totalVal.toFixed(2)}</strong></p>
-            <button onClick={handleDelete}>Sell</button>
+            <div className='details'>
+                <div className='detail-flex'>
+                    <p><strong>Name: </strong>{share.data.name}</p>
+                    <p><strong>Symbol: </strong>{share.data.symbol}</p>
+                </div>
+                    <div className='detail-flex'>
+                        <p><strong>Price: </strong>{share.data.priceUsd}</p>
+                        <p><strong>Shares held: </strong>{shareInDatabase.shares_held}</p>
+                    </div>
+                <p><strong>Total Value of Share Held: ${totalVal.toFixed(2)}</strong></p>
+                <button onClick={handleDelete} id='sell-button'>Sell</button>
             </div>      
         </div>
         </>

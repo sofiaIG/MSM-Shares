@@ -23,9 +23,9 @@ const TotalValue = ({shareNames, shares}) => {
 
 
     return (
-        <>
+        <div className='total-value'>
             <h3>Total Value Your Shares: ${totalValuee.toFixed(2)}</h3>
-        </>
+        </div>
 
     );
 }
