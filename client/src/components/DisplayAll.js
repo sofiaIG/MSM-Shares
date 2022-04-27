@@ -31,11 +31,11 @@ const DisplayAll = ({data})=>{
                 borderWidth: 1.5,
                 data: newArrayWithPrice,
 
-            }
-        ],
+        }
+    ],
     }
 
-    return (
+return (
         <div>
             <div>
                 <Bar
