@@ -6,33 +6,30 @@ import DisplayDetail from "./DisplayDetail";
 
 const DisplayAll = ({data})=>{
 
-const listOfShare = data.data
+    const listOfShare = data.data
 
-const shareList = listOfShare.map((share, index) => {
-      return <DisplayDetail key={index} share={share} />
-});
+    const shareList = listOfShare.map((share, index) => {
+        return <DisplayDetail key={index} share={share} />
+    });
 
-
-const newArrayWithName = (listOfShare).map((object) => {
-    return object.name
-})
-const newArrayWithPrice = (listOfShare).map((object) => {
-    return object.priceUsd
+    const newArrayWithName = (listOfShare).map((object) => {
+        return object.name
+    })
+    const newArrayWithPrice = (listOfShare).map((object) => {
+        return object.priceUsd
     })
     
-    // console.log(newArrayWithPrice);
-    
-const state = {
-    labels: newArrayWithName,
-    datasets: [
-        {
-            label: "Name / Price in $",
-            fill: false,
-            lineTension: 0.7,
-            backgroundColor: 'rgba(75,192,192,1)',
-            borderColor: 'rgba(0,0,0,1)',
-            borderWidth: 1.5,
-            data: newArrayWithPrice,
+    const state = {
+        labels: newArrayWithName,
+        datasets: [
+            {
+                label: "Name / Price in $",
+                fill: false,
+                lineTension: 0.7,
+                backgroundColor: 'rgba(75,192,192,1)',
+                borderColor: 'rgba(0,0,0,1)',
+                borderWidth: 1.5,
+                data: newArrayWithPrice,
 
         }
     ],
