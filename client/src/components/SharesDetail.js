@@ -59,8 +59,10 @@ const SharesDetail = ({share, removeShare, setClicked, findShareInDBfromShares, 
 
 
     return (
+        <>
         <div className='share-detail'>
                 <div>        
+
             <Line
             data={state}
             width = {800}
@@ -95,6 +97,7 @@ const SharesDetail = ({share, removeShare, setClicked, findShareInDBfromShares, 
             <button onClick={handleDelete}>Sell</button>
             </div>      
         </div>
+        </>
     );
 }
 
