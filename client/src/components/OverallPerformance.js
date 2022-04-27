@@ -5,6 +5,7 @@ import { Chart as ChartJS } from 'chart.js/auto';
 const OverallPerformance = ({ shareNames, shares }) => {
 
 
+
     const getTotalOfShare = (totalHeld, sharePrice) => {
         return parseFloat(totalHeld * sharePrice).toFixed(2);
     }
@@ -26,12 +27,13 @@ const OverallPerformance = ({ shareNames, shares }) => {
         return array;
     }
 
-    const arrayOfPrices = makeArrayOfTotalPrices();
-    const arrayOfLabels = arrayOfPrices.map((object) => {
+    const arrayOfPriceObjects = makeArrayOfTotalPrices();
+
+    const arrayOfLabels = arrayOfPriceObjects.map((object) => {
         return Object.keys(object)[0]
     });
 
-    const arrayOfNewPrices = arrayOfPrices.map((object) => {
+    const arrayOfPrices = arrayOfPriceObjects.map((object)=> {
         return Object.values(object)[0]
     });
 
@@ -53,8 +55,6 @@ const OverallPerformance = ({ shareNames, shares }) => {
                     'rgb(133,179,43)',
                     'rgb(59,64,50)',
                     'rgb(79,227,165)',
-
-
                 ],
                 hoverBackgroundColor: [
                     '#501800',

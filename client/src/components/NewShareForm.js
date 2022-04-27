@@ -2,26 +2,29 @@ import React, { useState } from 'react';
 import { postShares } from '../components/SharesService';
 
 
-const NewShareForm = ({addShare}) => {
+const NewShareForm = ({fetchNewShare, handleFormClick}) => {
     const [name, setName] = useState('');
     const [shares_held, setNumberShares] = useState(0)
 
     const handleName =event => setName(event.target.value);
     const handleShares = event => setNumberShares(event.target.value)
 
+    
+
     const handleSubmit =(event) =>{
-        // event.preventDefault();
+        event.preventDefault();
         const shares = {
             name,
             shares_held
         }
-        addShare(shares);
+        fetchNewShare(shares);
         setName('');
-        setNumberShares(0)
+        setNumberShares(0);
+        handleFormClick();
     }
 
     return (
-        <form onSubmit={handleSubmit} id = 'shares-form'>
+        <form onSubmit={handleSubmit} className='share-list'>
             <h2>Add a share</h2>
             <div>
                 <label htmlFor='name'>Name of the Company: </label>

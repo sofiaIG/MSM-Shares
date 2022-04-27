@@ -7,7 +7,7 @@ import SharesShow from "../components/SharesShow";
 import TotalValue from "../components/TotalValue";
 import DisplayAll from "../components/DisplayAll";
 
-const MainPage =({formClicked})=>{
+const MainPage =({formClicked, handleFormClick})=>{
 
     const [shares, setShares] = useState(null);
     const [shareClicked, setShareClicked] = useState(false);
@@ -34,8 +34,8 @@ const MainPage =({formClicked})=>{
 
     useEffect(() => {
         if (shareNames != null) {
-        setShares(loadShareData(getShareNames()));
-        setShareHistory(loadShareHistory(getShareNames()));
+            loadShareData(getShareNames());
+            loadShareHistory(getShareNames());
         }
     }, [shareNames])
 
@@ -58,22 +58,39 @@ const MainPage =({formClicked})=>{
     }
 
     const loadShareData = (names) => {
-        let shareData = [];
-        
+        let allPromises = []
+
         names.forEach((name) => {
-            fetchSharesJSON(name).then(data => shareData.push(data));
+            allPromises.push(fetchSharesJSON(name));
         });
 
-        return shareData;
+        Promise.all(allPromises)
+            .then((values) => {
+                setShares(values)
+            })
+
+        // return shareData;
     }
 
     const loadShareHistory = (names) => {
-        let shareHistoryData = [];
+        let allPromises = [];
+        let arrayOfNames = [];
 
         names.forEach((name) => {
-            fetchShareHistroyJSON(name).then(data => shareHistoryData.push(restructureToObject(name, data)))
+            arrayOfNames.push(name);
+            allPromises.push(fetchShareHistroyJSON(name))
         });
-        return shareHistoryData;
+        
+        Promise.all(allPromises)
+            .then((values) => {
+                let newValuesArray = []
+                values.forEach((value, index) => {
+                    let newObject = {}
+                    newObject[arrayOfNames[index]] = value
+                    newValuesArray.push(newObject);
+                })
+                setShareHistory(newValuesArray);
+            })
     }
     const fetchPrices = () => {
             fetch("https://api.coincap.io/v2/assets/")
@@ -99,29 +116,58 @@ const MainPage =({formClicked})=>{
         return lobject
     }
     
-    const addShare =(share) =>{
+    const addShare =(shareData, share) =>{
 
-        let fetchSuccess = false;
-
-        setLoaded(false);
         const tempShareNames = shareNames.map(s=>s);
         tempShareNames.push(restructureNewShare(share));
-        setShareNames(tempShareNames);
+       
+
         const tempShares = shares.map(s=>s);
-        fetchSharesJSON(share.name).then((data) => {
-            tempShares.push(data)
-            fetchSuccess = true;
-        }).catch(err => alert(err));
-      
-        setShares(tempShares);
-        postShares(share);
+        tempShares.push(shareData);
+        postShares(share)
+            .then(() => {
+                setShareNames(tempShareNames);
+                setShares(tempShares);
+                fetchFromDatabase();
+            });
+
+    }
+
+    const addNewShareHistory = (shareData) => {
+        const tempShareHistory = shareHistory.map(s=>s);
+        tempShareHistory.push(shareData);
+        setShareHistory(tempShareHistory);
     }
 
     const restructureNewShare = (share) => {
-        console.log(share.shares_held);
         let newSharesHeld = parseFloat(share.shares_held);
         return {name: share.name, shares_held: newSharesHeld}
     }
+
+    const fetchNewShare = (share) => {
+
+        const name = share.name;
+
+        fetchSharesJSON(name)
+        .then((data) => {
+            console.log(data)
+            console.log(data.hasOwnProperty('error'))
+            if (!data.hasOwnProperty('error')) {
+                addShare(data, share)
+            } else {
+                alert("Sorry, Couldn't find that crypto!")
+            }
+        }).catch(err => alert(err))
+
+
+        fetchShareHistroyJSON(name)
+        .then((data) => {
+            if (!data.hasOwnProperty('error')) {
+            addNewShareHistory(data) 
+            } 
+        }).catch(err => alert(err))
+    }
+
     const removeShare = (share) =>{
         const temp = shares.map(s=>s);
         const indexToDel = temp.indexOf(share)
@@ -153,7 +199,7 @@ const MainPage =({formClicked})=>{
         <>
 
         <div className='new-share'>
-        { formClicked ? <NewShareForm addShare = {addShare}/> : null}
+        { formClicked ? <NewShareForm fetchNewShare={fetchNewShare} handleFormClick={handleFormClick}/> : null}
         <br></br>
         {formClicked ? <DisplayAll data={allData} /> : null}
         </div>
