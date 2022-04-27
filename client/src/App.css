@@ -13,6 +13,12 @@
     width: 100%;
 }
 
+.new-share {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
 /* .App {
   text-align: center;
 }

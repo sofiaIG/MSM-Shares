@@ -151,19 +151,19 @@ const MainPage =({formClicked})=>{
 
     return (
         <>
+        <div className='new-share'>
+        { formClicked ? <NewShareForm addShare = {addShare}/> : null}
+        <br></br>
+        {formClicked ? <DisplayAll data={allData} /> : null}
+        </div>
         <div>
         {shareDataLoaded ? <TotalValue shareNames={shareNames} shares={shares} /> : null}
         </div>
         <div className="main-page">
             {shareDataLoaded ? <SharesList shares = {shares} handleShareClicked={handleShareClicked} />: null}
-            <SharesShow share={selectedShare} clicked={shareClicked} removeShare={removeShare} setClicked={setShareClicked} findShareInDBfromShares={findShareInDBfromShares} shareHistory = {shareHistory}/>
+            {shareDataLoaded ? <SharesShow share={selectedShare} clicked={shareClicked} removeShare={removeShare} setClicked={setShareClicked} findShareInDBfromShares={findShareInDBfromShares} shareHistory = {shareHistory} shareNames={shareNames} shares={shares}/> : null}
         </div>
         <br></br>
-        <div>
-        { formClicked ? <NewShareForm addShare = {addShare}/> : null}
-        <br></br>
-        {formClicked ? <DisplayAll data={allData} /> : null}
-        </div>
         </>
 
     )
