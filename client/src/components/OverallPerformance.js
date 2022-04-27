@@ -37,7 +37,8 @@ const OverallPerformance = ({ shareNames, shares }) => {
         return Object.values(object)[0]
     });
 
-    const arrayOfNewPricesNumber = arrayOfNewPrices.map(p => Number(p));
+    const arrayOfNewPricesNumber = arrayOfPrices.map(p => Number(p));
+
     const state = {
         labels: arrayOfLabels,
         datasets: [
@@ -62,7 +63,7 @@ const OverallPerformance = ({ shareNames, shares }) => {
                     '#175000',
 
                 ],
-                data: arrayOfNewPrices
+                data: arrayOfNewPricesNumber
             }
         ]
     }
