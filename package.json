@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@material-ui/lab": "^4.0.0-alpha.61",
     "express": "^4.17.3",
     "mongodb": "^3.5.7",
     "react-chartjs-2": "^4.1.0"
