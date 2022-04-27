@@ -4,6 +4,7 @@ import { Chart as ChartJS } from 'chart.js/auto';
 
 const OverallPerformance = ({ shareNames, shares }) => {
 
+
     const getTotalOfShare = (totalHeld, sharePrice) => {
         return parseFloat(totalHeld * sharePrice).toFixed(2);
     }
@@ -26,7 +27,6 @@ const OverallPerformance = ({ shareNames, shares }) => {
     }
 
     const arrayOfPrices = makeArrayOfTotalPrices();
-
     const arrayOfLabels = arrayOfPrices.map((object) => {
         return Object.keys(object)[0]
     });
@@ -36,17 +36,6 @@ const OverallPerformance = ({ shareNames, shares }) => {
     });
 
     const arrayOfNewPricesNumber = arrayOfNewPrices.map(p => Number(p));
-
-    // const newTotalSum = () => {
-    //     let total = 0;
-    //     arrayOfNewPricesNumber.forEach(x => total += x)
-    //     return total;
-    // }
-
-    // const  percentage = arrayOfNewPricesNumber.map((object) => {
-    //     return ((object / newTotalSum())* 100).toFixed(3)
-    // })
-
     const state = {
         labels: arrayOfLabels,
         datasets: [
@@ -78,7 +67,6 @@ const OverallPerformance = ({ shareNames, shares }) => {
         ]
     }
 
-
     return (
         <div>
             <h3>Overall Performance</h3>
@@ -97,6 +85,7 @@ const OverallPerformance = ({ shareNames, shares }) => {
                         }
                     }}
                 />
+
             </div>
         </div>
     );
