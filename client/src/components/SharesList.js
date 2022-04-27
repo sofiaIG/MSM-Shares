@@ -8,7 +8,7 @@ const SharesList = ({shares, handleShareClicked}) => {
     });
     
     return(
-        <div>
+        <div className='share-list'>
             {shareList}
         </div>
     );

@@ -4,6 +4,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './components/SharesDetail.css'
+import './components/SharesList.css'
+import './components/SharesItem.css'
+import './components/SharesList.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
