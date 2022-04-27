@@ -5,12 +5,14 @@ import DisplayDetail from "./DisplayDetail";
 
 
 const DisplayAll = ({data})=>{
+    // console.log(typeof data.data)
 
     const listOfShare = data.data
+    // console.log(listOfShare)
 
-    const shareList = listOfShare.map((share, index) => {
-        return <DisplayDetail key={index} share={share} />
-    });
+    // const shareList =() => {        
+    //     return 
+    // };
 
     const newArrayWithName = (listOfShare).map((object) => {
         return object.name
@@ -62,7 +64,7 @@ return (
                     }}
                 />
             </div>
-            {shareList}
+            <DisplayDetail share = {listOfShare} />
         </div>
     )
 }
