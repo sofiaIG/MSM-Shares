@@ -1,13 +1,14 @@
 import React from 'react';
 import NewShare from './NewShare';
+import './Header.css'
 
 const Header = ({handleFormClick}) => {
 
 
     return (
-        <div className='header'>
+        <div>
             <NewShare handleFormClick={handleFormClick}/>
-            <h2>I am Header</h2>
+            <h2>MSM Shares</h2>
         </div>
     );
 }
