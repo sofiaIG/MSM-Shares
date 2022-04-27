@@ -43,13 +43,14 @@ const SharesDetail = ({share, removeShare, setClicked, findShareInDBfromShares, 
         labels: xlabel,
         datasets: [
             {
-            label: [share.data.name],
+            label: share.data.name,
             fill: false,
             lineTension: 0.7,
             backgroundColor: 'rgba(75,192,192,1)',
             borderColor: 'rgba(0,0,0,1)',
-            borderWidth: 2,
-            data: ylabel
+            borderWidth: 1.5,
+            data: ylabel,
+
             }
         ]
         }
@@ -60,21 +61,31 @@ const SharesDetail = ({share, removeShare, setClicked, findShareInDBfromShares, 
     return (
         <>
         <div className='share-detail'>
-            <div>
+                <div>        
 
             <Line
             data={state}
+            width = {800}
+            height = {400}
             options={{
-                title:{
-                display:true,
-                text:'Average Title per month',
-                fontSize:20
-                },
-                legend:{
-                display:true,
-                position:'right'
+                plugins: {
+                    title: {
+                        display: true,
+                        text: `The ${share.data.name} chart`
+                    }
                 }
-            }}
+        }}
+
+            // options={{
+            //     options: {
+            //         plugins: {
+            //             title: {
+            //                 display: true,
+            //                 text: `The ${share.data.name} chart graph`
+            //             }
+            //         }
+            //     } 
+            // }}
             />
         </div>
             <div>
