@@ -7,7 +7,7 @@ import SharesShow from "../components/SharesShow";
 import TotalValue from "../components/TotalValue";
 import DisplayAll from "../components/DisplayAll";
 
-const MainPage =({formClicked})=>{
+const MainPage =({formClicked, handleFormClick})=>{
 
     const [shares, setShares] = useState(null);
     const [shareClicked, setShareClicked] = useState(false);
@@ -34,8 +34,8 @@ const MainPage =({formClicked})=>{
 
     useEffect(() => {
         if (shareNames != null) {
-        setShares(loadShareData(getShareNames()));
-        setShareHistory(loadShareHistory(getShareNames()));
+            setShares(loadShareData(getShareNames()));
+            setShareHistory(loadShareHistory(getShareNames()));
         }
     }, [shareNames])
 
@@ -59,7 +59,7 @@ const MainPage =({formClicked})=>{
 
     const loadShareData = (names) => {
         let shareData = [];
-        
+
         names.forEach((name) => {
             fetchSharesJSON(name).then(data => shareData.push(data));
         });
@@ -99,29 +99,52 @@ const MainPage =({formClicked})=>{
         return lobject
     }
     
-    const addShare =(share) =>{
+    const addShare =(shareData, share) =>{
 
-        let fetchSuccess = false;
-
-        setLoaded(false);
         const tempShareNames = shareNames.map(s=>s);
         tempShareNames.push(restructureNewShare(share));
         setShareNames(tempShareNames);
+
         const tempShares = shares.map(s=>s);
-        fetchSharesJSON(share.name).then((data) => {
-            tempShares.push(data)
-            fetchSuccess = true;
-        }).catch(err => alert(err));
-      
+        tempShares.push(shareData);
         setShares(tempShares);
+
         postShares(share);
     }
 
+    const addNewShareHistory = (shareData) => {
+        const tempShareHistory = shareHistory.map(s=>s);
+        tempShareHistory.push(shareData);
+        setShareHistory(tempShareHistory);
+    }
+
     const restructureNewShare = (share) => {
-        console.log(share.shares_held);
         let newSharesHeld = parseFloat(share.shares_held);
         return {name: share.name, shares_held: newSharesHeld}
     }
+
+    const fetchNewShare = (share) => {
+
+        let name = share.name;
+
+        fetchSharesJSON(name)
+        .then((data) => {
+            if (!data.error) {
+                addShare(data, share)
+            } else {
+                alert("Sorry, Couldn't find that crypto!")
+            }
+        }).catch(err => alert(err))
+
+
+        fetchShareHistroyJSON(name)
+        .then((data) => {
+            if (!data.error) {
+            addNewShareHistory(data) 
+            } 
+        }).catch(err => alert(err))
+    }
+
     const removeShare = (share) =>{
         const temp = shares.map(s=>s);
         const indexToDel = temp.indexOf(share)
@@ -152,7 +175,7 @@ const MainPage =({formClicked})=>{
     return (
         <>
         <div className='new-share'>
-        { formClicked ? <NewShareForm addShare = {addShare}/> : null}
+        { formClicked ? <NewShareForm fetchNewShare={fetchNewShare} handleFormClick={handleFormClick}/> : null}
         <br></br>
         {formClicked ? <DisplayAll data={allData} /> : null}
         </div>
