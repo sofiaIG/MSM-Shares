@@ -61,6 +61,13 @@ const OverallPerformance = ({ shareNames, shares }) => {
                     '#501800',
                     '#4B5000',
                     '#175000',
+                    '#87D69C',
+                    '#1876A8',
+                    '#B807E0',
+                    '#E04F07',
+                    '#5C4D46',
+                    '#7AD124',
+                    '#6C24D1',
 
                 ],
                 data: arrayOfNewPricesNumber
