@@ -15,8 +15,8 @@ function App() {
 
   return (
     <div className='app'>
-      <Header handleFormClick={handleFormClick}/>
-      <MainPage formClicked={formClicked}/>
+      <Header handleFormClick={handleFormClick} />
+      <MainPage formClicked={formClicked} handleFormClick={handleFormClick}/>
     </div>
   );
 }

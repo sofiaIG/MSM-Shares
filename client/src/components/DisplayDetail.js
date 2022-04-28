@@ -1,12 +1,17 @@
+<<<<<<< HEAD
 import ReactPaginate from "react-paginate";
 import { useState } from "react";
 import './DisplayDetail.css'
 
 
+=======
+import React from "react";
+>>>>>>> develop
 const DisplayDetail =({share})=>{
     const [pageNumber, setPageNumber] = useState(0);
 
 
+<<<<<<< HEAD
     const sharesPerPage = 5;
     const pagesVisited = pageNumber * sharesPerPage;
 
@@ -16,6 +21,12 @@ const DisplayDetail =({share})=>{
       return (
         <div>
                 <p>Name: {share.name}</p>
+=======
+    return(
+        <div class = "display-detail">
+            <div>
+                <p>Name: {share.id}</p>
+>>>>>>> develop
                 <p>Supply: {share.supply}</p>
                 <p>MaxSupply: {share.maxSupply}</p>
                 <p>PriceUSD: {share.priceUsd}</p>

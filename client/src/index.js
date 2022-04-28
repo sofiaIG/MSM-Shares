@@ -9,6 +9,7 @@ import './components/SharesItem.css'
 import './components/SharesList.css'
 import './components/TotalValue.css'
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

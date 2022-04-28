@@ -3,17 +3,23 @@ import {Line} from 'react-chartjs-2';
 import {Chart as ChartJS} from 'chart.js/auto';
 
 const SharesDetail = ({share, removeShare, setClicked, findShareInDBfromShares, shareHistory}) => {
+
     const newShare = () =>{
+
         let newShareHistory ;
+
         shareHistory.forEach((object) =>{
             if (Object.keys(object)[0] == share.data.id) {
                 newShareHistory = object;
-                return 
+                return
         }
     }) 
     return newShareHistory;
     }
+
+    
     const thisShareHistroy = newShare();
+
     const shareData = thisShareHistroy[share.data.id]
 
     const newArrayWithPrice = (shareData.data).map((object) =>{
@@ -28,9 +34,11 @@ const SharesDetail = ({share, removeShare, setClicked, findShareInDBfromShares, 
     const totValueOfShare = () => {
         return share.data.priceUsd * shareInDatabase.shares_held;
     }
+
+    console.log(newArrayWithTime)
     
-    const sliceTime = newArrayWithTime.slice(0,30);
-    const slicePrice = newArrayWithPrice.slice(0,30);
+    const sliceTime = newArrayWithTime.slice(641,671);
+    const slicePrice = newArrayWithPrice.slice(641,671);
 
     const handleDelete = () => {
         removeShare(share);
@@ -38,7 +46,6 @@ const SharesDetail = ({share, removeShare, setClicked, findShareInDBfromShares, 
     }
     const xlabel = sliceTime;
     const ylabel = slicePrice;
-
     const state = {
         labels: xlabel,
         datasets: [
@@ -50,7 +57,6 @@ const SharesDetail = ({share, removeShare, setClicked, findShareInDBfromShares, 
             borderColor: 'rgba(0,0,0,1)',
             borderWidth: 1.5,
             data: ylabel,
-
             }
         ]
         }
@@ -60,9 +66,8 @@ const SharesDetail = ({share, removeShare, setClicked, findShareInDBfromShares, 
 
     return (
         <>
+        <div>
         <div className='share-detail'>
-                <div>        
-
             <Line
             data={state}
             width = {800}
@@ -97,7 +102,7 @@ const SharesDetail = ({share, removeShare, setClicked, findShareInDBfromShares, 
                         <p><strong>Price: </strong>{share.data.priceUsd}</p>
                         <p><strong>Shares held: </strong>{shareInDatabase.shares_held}</p>
                     </div>
-                <p><strong>Total Value of Share Held: ${totalVal.toFixed(2)}</strong></p>
+                <p><strong>Total Value of Share Held: </strong>${totalVal.toFixed(2)}</p>
                 <button onClick={handleDelete} id='sell-button'>Sell</button>
             </div>      
         </div>

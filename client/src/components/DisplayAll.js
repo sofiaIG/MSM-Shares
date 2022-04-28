@@ -38,12 +38,10 @@ const DisplayAll = ({data})=>{
     }
 
 return (
-        <div>
+        <div className='share-list'>
             <div>
                 <Bar
                     data={state}
-                    width = {500}
-                    height = {200}
                     options={{
                             plugins: {
                                 title: {
