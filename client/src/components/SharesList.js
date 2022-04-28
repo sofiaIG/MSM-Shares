@@ -1,10 +1,10 @@
 import React from 'react';
 import SharesItem from "./SharesItem";
 
-const SharesList = ({shares, handleShareClicked}) => {
+const SharesList = ({shares, handleShareClicked, selectedShare}) => {
 
     const shareList = shares.map((share, index) => {
-        return <SharesItem key={index} share={share} handleShareClicked={handleShareClicked}/>
+        return <SharesItem key={index} share={share} handleShareClicked={handleShareClicked} selectedShare={selectedShare}/>
     });
     
     return(
