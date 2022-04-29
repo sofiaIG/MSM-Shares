@@ -80,17 +80,6 @@ const SharesDetail = ({share, removeShare, setClicked, findShareInDBfromShares, 
                     }
                 }
         }}
-
-            // options={{
-            //     options: {
-            //         plugins: {
-            //             title: {
-            //                 display: true,
-            //                 text: `The ${share.data.name} chart graph`
-            //             }
-            //         }
-            //     } 
-            // }}
             />
         </div>
             <div className='details'>
