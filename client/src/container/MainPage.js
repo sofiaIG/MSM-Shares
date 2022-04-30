@@ -9,6 +9,8 @@ import DisplayAll from "../components/DisplayAll";
 
 const MainPage =({formClicked, handleFormClick})=>{
 
+
+    //List of all our states
     const [shares, setShares] = useState(null);
     const [shareClicked, setShareClicked] = useState(false);
     const [selectedShare, setSelectedShare] = useState(null);
@@ -18,6 +20,8 @@ const MainPage =({formClicked, handleFormClick})=>{
     const [isLoading, setIsLoading] = useState(true);
     const [allData, setAllData] = useState(null);
 
+
+    //When app loads, fetch from database and share history api
     useEffect(()=>{
         fetchFromDatabase();
         fetchPrices();
@@ -25,13 +29,7 @@ const MainPage =({formClicked, handleFormClick})=>{
             setIsLoading(false)
         }, 2000)
     }, [])
-
-    const fetchFromDatabase = () => {
-        fetch('http://localhost:9000/api/shares')
-        .then(res => res.json())
-        .then(data => setShareNames(data));
-    }
-
+   
     useEffect(() => {
         if (shareNames != null) {
             loadShareData(getShareNames());
@@ -49,7 +47,7 @@ const MainPage =({formClicked, handleFormClick})=>{
         }
     }, [shares])
 
-
+    // A functino to seperate the share names from the list of saved shares in database
     const getShareNames = () => {
         let sharesMapped = shareNames.map((object) => {
             return object.name
@@ -57,10 +55,17 @@ const MainPage =({formClicked, handleFormClick})=>{
         return sharesMapped;
     }
 
+    const fetchFromDatabase = () => {
+        fetch('http://localhost:9000/api/shares')
+        .then(res => res.json())
+        .then(data => setShareNames(data));
+    }
+
+
     const loadShareData = (names) => {
         let allPromises = []
 
-        names.forEach((name) => {
+        names.forEach((name) => {                           // Here are functions for API requests, Database fetches...
             allPromises.push(fetchSharesJSON(name));
         });
 
@@ -68,8 +73,6 @@ const MainPage =({formClicked, handleFormClick})=>{
             .then((values) => {
                 setShares(values)
             })
-
-        // return shareData;
     }
 
     const loadShareHistory = (names) => {
@@ -94,25 +97,25 @@ const MainPage =({formClicked, handleFormClick})=>{
     }
     const fetchPrices = () => {
             fetch("https://api.coincap.io/v2/assets/")
-            .then(res => res.json())
+            .then(res => res.json())                                    //Total shares fetch from API
             .then(data =>(setAllData(data)))
     }
 
     const fetchShareHistroyJSON = async (name) => {
         const response = await fetch(`https://api.coincap.io/v2/assets/${name}/history?interval=m15`);
         const theShareHistory = await response.json();
-        return theShareHistory;
+        return theShareHistory;                                     //Share histroy fetch from API
     }
 
     const fetchSharesJSON = async (name) => {
         const response = await fetch(`https://api.coincap.io/v2/assets/${name}`);
         const theShareData = await response.json();
-        return theShareData;
+        return theShareData;                                            //Share fetch from api based on saved shares in database
     }
 
     const restructureToObject = (inputName, data) => {
         const lobject = {};
-        lobject[inputName] = data;
+        lobject[inputName] = data;                              //function to restructure the data when needed
         return lobject
     }
     
@@ -129,9 +132,8 @@ const MainPage =({formClicked, handleFormClick})=>{
                 setShareNames(tempShareNames);
                 setShares(tempShares);
                 fetchFromDatabase();
-            });
-
-    }
+            });                                                 //All of these functions are for adding a new share and doing any 
+    }                                                           // Necessary restructuring of data
 
     const addNewShareHistory = (shareData) => {
         const tempShareHistory = shareHistory.map(s=>s);
@@ -175,7 +177,7 @@ const MainPage =({formClicked, handleFormClick})=>{
         setShares(temp);
         const databaseShare = findShareInDBfromShares(share);
         deleteShares(databaseShare._id);
-    }
+    } 
 
     const findShareInDBfromShares = (share) => {
         let foundShare;
@@ -187,7 +189,7 @@ const MainPage =({formClicked, handleFormClick})=>{
             }})
         
         return foundShare;
-    }
+    }                                   //This is used to match up shares from our database and the shares from the external api ffetch
     
 
     const handleShareClicked = (share) => {
