@@ -120,14 +120,7 @@ const MainPage = ({ formClicked, handleFormClick }) => {
   };
 
   const addShare = (shareData, share) => {
-    const tempShareNames = shareNames.map((s) => s);
-    tempShareNames.push(restructureNewShare(share));
-
-    const tempShares = shares.map((s) => s);
-    tempShares.push(shareData);
     postShares(share).then(() => {
-      setShareNames(tempShareNames);
-      setShares(tempShares);
       fetchFromDatabase();
     }); //All of these functions are for adding a new share and doing any
   }; // Necessary restructuring of data
@@ -140,7 +133,7 @@ const MainPage = ({ formClicked, handleFormClick }) => {
 
   const restructureNewShare = (share) => {
     let newSharesHeld = parseFloat(share.shares_held);
-    return { name: share.name, shares_held: newSharesHeld };
+    return { name: share.name, shares_held: newSharesHeld, buy_price: share.buy_price };
   };
 
   const fetchNewShare = (share) => {
@@ -148,8 +141,6 @@ const MainPage = ({ formClicked, handleFormClick }) => {
 
     fetchSharesJSON(name)
       .then((data) => {
-        console.log(data);
-        console.log(data.hasOwnProperty("error"));
         if (!data.hasOwnProperty("error")) {
           addShare(data, share);
         } else {

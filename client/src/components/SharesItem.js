@@ -1,4 +1,4 @@
-import React from "react";
+import React,{ useState } from "react";
 
 const SharesItem = ({
   share,
@@ -23,7 +23,7 @@ const SharesItem = ({
     let totalPL = pl * thisShare.shares_held;
     return totalPL;
   };
-
+  console.log('rendering: ', share, shareNames)
   const currentPL = calculatePL();
 
   return (
