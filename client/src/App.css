@@ -1,33 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=Arimo&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Arimo&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap");
 
 .app {
-  font-family: 'Libre Baskerville', serif;
+  font-family: "Libre Baskerville", serif;
 }
 
-.shares-item{
- display: flex;
- /* text-align: center; */
- flex-direction: row;
- border-top: 1px solid grey;
- border-bottom: 1px solid grey;
- padding: .5em;
+.shares-item {
+  display: flex;
+  /* text-align: center; */
+  flex-direction: row;
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+  padding: 0.5em;
 }
 
 .shares-item-selected {
   display: flex;
- /* text-align: center; */
- flex-direction: row;
- border-top: 1px solid grey;
- border-bottom: 1px solid grey;
- padding: .5em;
- background-color: rgba(75,192,192,1);
+  /* text-align: center; */
+  flex-direction: row;
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+  padding: 0.5em;
+  background-color: rgba(75, 192, 192, 1);
 }
 
 .main-page {
-    display:flex;
-    justify-content: space-evenly;
-    width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
 }
 
 .new-share {
@@ -35,18 +35,17 @@
   display: flex;
   justify-content: space-evenly;
 }
-.header{
-  display:flex;
+.header {
+  display: flex;
   align-items: center;
   margin-top: 25px;
-  margin-left:114px;
+  margin-left: 114px;
 }
 
-.h2{
+.h2 {
   text-align: center;
   margin: auto;
 }
-
 
 /* .App {
   text-align: center;
