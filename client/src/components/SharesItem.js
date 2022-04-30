@@ -28,7 +28,7 @@ const SharesItem = ({share, handleShareClicked, selectedShare, shareNames}) => {
             <p class = "item">Name: {share.data.name} </p>
             <p class = "item">Symbol: {share.data.symbol}</p>
             <p class = "item">Price: ${parseFloat(share.data.priceUsd).toFixed(2)}</p>
-            <p class = "item">Profit/Loss: ${currentPL.toFixed(3)}</p>
+            <p class = {"item" + (currentPL >= 0 ? '-profit' : '-loss')}>Profit/Loss: ${currentPL >= 0 ? '+' : null}{currentPL.toFixed(3)}</p>
             <br></br>
         </div>
     );

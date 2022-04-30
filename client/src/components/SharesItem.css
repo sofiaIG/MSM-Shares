@@ -1,13 +1,23 @@
 
 .item{
-    margin-right: 40px;
+    margin-right: 30px;
 }
 
 .item-selected {
-    margin-right: 40px;
+    margin-right: 30px;
     background-color: rgba(75,192,192,1);
 }
 
 .item:hover {
     background-color: lightblue;
+}
+
+.item-profit {
+    margin-right: 30px;
+    color: green;
+}
+
+.item-loss {
+    margin-right: 30px;
+    color: red;
 }
