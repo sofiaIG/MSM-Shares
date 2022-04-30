@@ -16,7 +16,6 @@ const SharesDetail = ({share, removeShare, setClicked, findShareInDBfromShares, 
     }) 
     return newShareHistory;
     }
-
     
     const thisShareHistroy = newShare();
 

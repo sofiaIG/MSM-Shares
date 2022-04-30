@@ -4,8 +4,6 @@ import { Chart as ChartJS } from 'chart.js/auto';
 
 const OverallPerformance = ({ shareNames, shares }) => {
 
-
-
     const getTotalOfShare = (totalHeld, sharePrice) => {
         return parseFloat(totalHeld * sharePrice).toFixed(2);
     }
