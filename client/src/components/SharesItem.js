@@ -11,7 +11,7 @@ const SharesItem = ({share, handleShareClicked, selectedShare, shareNames}) => {
         const foundShare = shareNames.filter((object) => {
             return object.name == share.data.id
         })
-        return foundShare;
+        return foundShare[0];
     }
 
     const calculatePL = () => {
@@ -22,7 +22,6 @@ const SharesItem = ({share, handleShareClicked, selectedShare, shareNames}) => {
     }
 
     const currentPL = calculatePL();
-    console.log(currentPL)
 
     return(
         <div className = {"shares-item" + (share==selectedShare ? '-selected' : '')} onClick={handleClick}>
