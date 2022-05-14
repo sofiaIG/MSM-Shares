@@ -69,11 +69,11 @@ const SharesDetail = ({
   return (
     <>
       <div>
-        <div className="share-detail">
+        <div className=''>
           <Line
             data={state}
-            width={800}
-            height={400}
+            width={500}
+            height={200}
             options={{
               plugins: {
                 title: {
@@ -85,7 +85,7 @@ const SharesDetail = ({
           />
         </div>
         <div className="details">
-          <div className="detail-flex">
+          <div className='flex justify-evenly mt-6  pt-4 text-lg text-teal-400 border-t-2 border-teal-700'>
             <p>
               <strong>Name: </strong>
               {share.data.name}
@@ -95,20 +95,20 @@ const SharesDetail = ({
               {share.data.symbol}
             </p>
           </div>
-          <div className="detail-flex">
+          <div className='flex justify-evenly mt-2 text-lg text-teal-400'>
             <p>
               <strong>Price: </strong>
               {share.data.priceUsd}
             </p>
-            <p>
+            <p className="text-lg text-teal-400">
               <strong>Shares held: </strong>
               {shareInDatabase.shares_held}
             </p>
           </div>
-          <p>
+          <p className=' text-center mt-3 text-lg text-teal-400'>
             <strong>Total Value of Share Held: </strong>${totalVal.toFixed(2)}
           </p>
-          <button onClick={handleDelete} id="sell-button">
+          <button className='bg-white hover:bg-teal-300 text-teal-500 font-semibold hover:text-white py-2 px-4 border border-teal-500 hover:border-transparent rounded hover:transform' onClick={handleDelete} id="sell-button">
             Sell
           </button>
         </div>

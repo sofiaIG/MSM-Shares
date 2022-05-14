@@ -12,7 +12,7 @@ function App() {
   };
 
   return (
-    <div className="app">
+    <div>
       <Header handleFormClick={handleFormClick} />
       <MainPage formClicked={formClicked} handleFormClick={handleFormClick} />
     </div>

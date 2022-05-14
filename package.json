@@ -3,6 +3,8 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@headlessui/react": "^1.6.0",
+    "@heroicons/react": "^1.0.6",
     "@material-ui/lab": "^4.0.0-alpha.61",
     "express": "^4.17.3",
     "mongodb": "^3.5.7",

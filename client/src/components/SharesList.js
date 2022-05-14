@@ -19,7 +19,9 @@ const SharesList = ({
     );
   });
 
-  return <div className="share-list">{shareList}</div>;
+  return <div className=' border-2 border-teal-400 shadow-xl shadow-teal-800 rounded-2xl bg-teal-400 p-2'>
+           <ul>{shareList}</ul>
+          </div>;
 };
 
 export default SharesList;

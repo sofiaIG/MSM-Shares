@@ -36,8 +36,9 @@ const DisplayAll = ({ data }) => {
   };
 
   return (
-    <div className="share-list">
-      <div>
+    <div>
+      <DisplayDetail share={listOfShare} />
+      <div className='justify-center'>
         <Bar
           data={state}
           options={{
@@ -60,7 +61,6 @@ const DisplayAll = ({ data }) => {
           }}
         />
       </div>
-      <DisplayDetail share={listOfShare} />
     </div>
   );
 };

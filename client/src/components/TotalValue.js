@@ -19,8 +19,8 @@ const TotalValue = ({ shareNames, shares }) => {
   const totalValuee = totalValueOverall();
 
   return (
-    <div className="total-value">
-      <h3>
+    <div>
+      <h3 className=' underline mb-2'>
         <strong>Total Value Of Your Shares:</strong> ${totalValuee.toFixed(2)}
       </h3>
     </div>

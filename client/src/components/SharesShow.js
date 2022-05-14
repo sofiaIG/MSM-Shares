@@ -13,7 +13,7 @@ const SharesShow = ({
   shares,
 }) => {
   return (
-    <div className="share-list">
+    <div className="border-4 border-teal-400 shadow-xl shadow-teal-800 rounded-2xl bg-white p-10">
       {clicked ? (
         <SharesDetail
           share={share}

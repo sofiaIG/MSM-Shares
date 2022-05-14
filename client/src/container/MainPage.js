@@ -187,42 +187,50 @@ const MainPage = ({ formClicked, handleFormClick }) => {
 
   return (
     <>
-      <div className="new-share">
-        {formClicked ? (
-          <NewShareForm
-            fetchNewShare={fetchNewShare}
-            handleFormClick={handleFormClick}
-          />
-        ) : null}
+      <div className='flex justify-evenly mt-6'>
+        <div>
+          {formClicked ? (
+            <NewShareForm
+              fetchNewShare={fetchNewShare}
+              handleFormClick={handleFormClick}
+            />
+          ) : null}
+        </div>
         <br></br>
         {formClicked ? <DisplayAll data={allData} /> : null}
       </div>
-      <div>
-        {shareDataLoaded ? (
-          <TotalValue shareNames={shareNames} shares={shares} />
-        ) : null}
-      </div>
-      <div className="main-page">
-        {shareDataLoaded ? (
-          <SharesList
-            shares={shares}
-            handleShareClicked={handleShareClicked}
-            selectedShare={selectedShare}
-            shareNames={shareNames}
-          />
-        ) : null}
-        {shareDataLoaded ? (
-          <SharesShow
-            share={selectedShare}
-            clicked={shareClicked}
-            removeShare={removeShare}
-            setClicked={setShareClicked}
-            findShareInDBfromShares={findShareInDBfromShares}
-            shareHistory={shareHistory}
-            shareNames={shareNames}
-            shares={shares}
-          />
-        ) : null}
+      
+      
+      <div className='flex justify-evenly mt-4'>
+        <div className="mt-10">
+        <div className='text-center text-2xl font-semibold text-teal-400 mt-0'>
+          {shareDataLoaded ? (
+            <TotalValue shareNames={shareNames} shares={shares} />
+          ) : null}
+        </div>
+          {shareDataLoaded ? (
+            <SharesList
+              shares={shares}
+              handleShareClicked={handleShareClicked}
+              selectedShare={selectedShare}
+              shareNames={shareNames}
+            />
+          ) : null}
+        </div>
+        <div>
+          {shareDataLoaded ? (
+            <SharesShow
+              share={selectedShare}
+              clicked={shareClicked}
+              removeShare={removeShare}
+              setClicked={setShareClicked}
+              findShareInDBfromShares={findShareInDBfromShares}
+              shareHistory={shareHistory}
+              shareNames={shareNames}
+              shares={shares}
+            />
+          ) : null}
+        </div>
       </div>
       <br></br>
     </>

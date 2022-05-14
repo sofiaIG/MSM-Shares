@@ -1,11 +1,11 @@
 import React from "react";
 import NewShare from "./NewShare";
-import "./Header.css";
+import arrow from "../static/new-arrow.jpeg"
 
 const Header = ({ handleFormClick }) => {
   return (
-    <div class="header">
-      <h2 class="h2">MSM Shares</h2>
+    <div className='flex justify-between p-6 bg-teal-400'>
+      <h1 className=' text-2xl text-white font-extrabold mt-1 flex'>MSM Shares</h1>
       <NewShare handleFormClick={handleFormClick} />
     </div>
   );

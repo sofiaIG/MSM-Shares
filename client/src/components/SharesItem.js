@@ -1,3 +1,4 @@
+import { useTabContext } from "@material-ui/lab";
 import React,{ useState } from "react";
 
 const SharesItem = ({
@@ -6,6 +7,7 @@ const SharesItem = ({
   selectedShare,
   shareNames,
 }) => {
+
   const handleClick = () => {
     handleShareClicked(share);
   };
@@ -23,23 +25,23 @@ const SharesItem = ({
     let totalPL = pl * thisShare.shares_held;
     return totalPL;
   };
-  console.log('rendering: ', share, shareNames)
+
   const currentPL = calculatePL();
 
   return (
     <div
-      className={"shares-item" + (share == selectedShare ? "-selected" : "")}
+      className={ share === selectedShare ? ' flex m-3 flex-wrap text-white font-bold border p-3 bg-teal-600 border-teal-500 rounded-xl' : 'flex m-3 flex-wrap text-teal-400 font-bold border p-3 bg-white border-teal-500 rounded-xl hover:bg-teal-300 hover:text-white'}
       onClick={handleClick}
     >
-      <p className="item">Name: {share.data.name} </p>
-      <p className="item">Symbol: {share.data.symbol}</p>
-      <p className="item">
+      <li className='mx-2 border-l p-1'>Name: {share.data.name} </li>
+      <li className='mx-2 border-l p-1'>Symbol: {share.data.symbol}</li>
+      <li className='mx-2 border-l p-1'>
         Price: ${parseFloat(share.data.priceUsd).toFixed(2)}
-      </p>
-      <p className={"item" + (currentPL >= 0 ? "-profit" : "-loss")}>
+      </li>
+      <li className={(currentPL >= 0 ? 'mx-2 border-l p-1 text-green-300' : 'mx-2 border-l p-1 text-red-600')}>
         Profit/Loss: ${currentPL >= 0 ? "+" : null}
         {currentPL.toFixed(3)}
-      </p>
+      </li>
       <br></br>
     </div>
   );

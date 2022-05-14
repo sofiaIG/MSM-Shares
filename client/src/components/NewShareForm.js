@@ -25,11 +25,12 @@ const NewShareForm = ({ fetchNewShare, handleFormClick }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="share-list">
-      <h2>Add a share</h2>
-      <div>
-        <label htmlFor="name">Name of the Company: </label>
+    <form onSubmit={handleSubmit} className='border shadow-md mt-10 p-12 rounded'>
+      <h2 className='text-center text-lg font-semibold mb-4 text-teal-900 underline'>Add a Crypto</h2>
+      <div className='m-3'>
+        <label htmlFor="name">Name of the Crypto: </label>
         <input
+          className='border border-teal-200 ml-3 rounded-md'
           onChange={handleName}
           value={name}
           type="text"
@@ -37,9 +38,10 @@ const NewShareForm = ({ fetchNewShare, handleFormClick }) => {
           required
         />
       </div>
-      <div>
-        <label htmlFor="shares_held">Number of Shares: </label>
+      <div className="m-3">
+        <label className='mr-10' htmlFor="shares_held">Number to Purchase: </label>
         <input
+          className='border border-teal-200 rounded-md'
           onChange={handleShares}
           value={shares_held}
           type="number"
@@ -49,9 +51,10 @@ const NewShareForm = ({ fetchNewShare, handleFormClick }) => {
           required
         />
       </div>
-      <div>
+      <div className="m-3">
         <label htmlFor="buy_price">Buy price: </label>
         <input
+          className='border border-teal-200 ml-3 rounded-md'
           onChange={handleBuyPrice}
           value={buy_price}
           type="number"
@@ -59,7 +62,7 @@ const NewShareForm = ({ fetchNewShare, handleFormClick }) => {
           id="buy-price"
         />
       </div>
-      <button type="submit" id="save">
+      <button className='bg-white hover:bg-teal-300 text-teal-500 font-semibold hover:text-white py-2 px-4 border border-teal-500 hover:border-transparent rounded hover:transform 'type="submit" id="save">
         Save
       </button>
     </form>

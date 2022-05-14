@@ -75,7 +75,7 @@ const OverallPerformance = ({ shareNames, shares }) => {
 
   return (
     <div>
-      <h3>Overall Performance</h3>
+      <h3 className='text-center text-lg font-semibold text-teal-600'>Overall Performance</h3>
       <div>
         <Pie
           data={state}
