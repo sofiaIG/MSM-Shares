@@ -1,70 +1,68 @@
-import React from 'react';
-import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS } from 'chart.js/auto';
+import React from "react";
+import { Bar } from "react-chartjs-2";
+import { Chart as ChartJS } from "chart.js/auto";
 import DisplayDetail from "./DisplayDetail";
 
+const DisplayAll = ({ data }) => {
+  // console.log(typeof data.data)
 
-const DisplayAll = ({data})=>{
-    // console.log(typeof data.data)
+  const listOfShare = data.data;
+  // console.log(listOfShare)
 
-    const listOfShare = data.data
-    // console.log(listOfShare)
+  // const shareList =() => {
+  //     return
+  // };
 
-    // const shareList =() => {        
-    //     return 
-    // };
+  const newArrayWithName = listOfShare.map((object) => {
+    return object.name;
+  });
+  const newArrayWithPrice = listOfShare.map((object) => {
+    return object.priceUsd;
+  });
 
-    const newArrayWithName = (listOfShare).map((object) => {
-        return object.name
-    })
-    const newArrayWithPrice = (listOfShare).map((object) => {
-        return object.priceUsd
-    })
-    
-    const state = {
-        labels: newArrayWithName,
-        datasets: [
-            {
-                label: "Name / Price in $",
-                fill: false,
-                lineTension: 0.7,
-                backgroundColor: 'rgba(75,192,192,1)',
-                borderColor: 'rgba(0,0,0,1)',
-                borderWidth: 1.5,
-                data: newArrayWithPrice,
-
-        }
+  const state = {
+    labels: newArrayWithName,
+    datasets: [
+      {
+        label: "Name / Price in $",
+        fill: false,
+        lineTension: 0.7,
+        backgroundColor: "rgba(75,192,192,1)",
+        borderColor: "rgba(0,0,0,1)",
+        borderWidth: 1.5,
+        data: newArrayWithPrice,
+      },
     ],
-    }
+  };
 
-return (
-        <div className='share-list'>
-            <div>
-                <Bar
-                    data={state}
-                    options={{
-                            plugins: {
-                                title: {
-                                    display: true,
-                                    text: "All the Shares by price"
-                                }
-                            },
-                            scales: {
-                                y: {
-                                    ticks: {
-                                        // Include a dollar sign in the ticks
-                                        callback: function(value, index, ticks) {
-                                            return  value + '$';
-                                        }
-                                    }
-                                }
-                            }
-                    }}
-                />
-            </div>
-            <DisplayDetail share = {listOfShare} />
-        </div>
-    )
-}
+  return (
+    <div>
+      <DisplayDetail share={listOfShare} />
+      <div className='justify-center'>
+        <Bar
+          data={state}
+          options={{
+            plugins: {
+              title: {
+                display: true,
+                text: "All the Shares by price",
+              },
+            },
+            scales: {
+              y: {
+                ticks: {
+                  // Include a dollar sign in the ticks
+                  callback: function (value, index, ticks) {
+                    return value + "$";
+                  },
+                },
+              },
+            },
+          }}
+        />
+      </div>
+    </div>
+  );
+};
 
 export default DisplayAll;
