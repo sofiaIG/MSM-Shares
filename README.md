@@ -1,5 +1,11 @@
 # CryptoCurrency Portfolio Tracker
 
+
+## Table of contents
+* [Techonologies used in making this web app](#techonologies-used-in-making-this-web-app)
+* [Brief for Crypto Tracker](#brief-for-crypto-tracker)
+* [How to get the app running](#how-to-get-the-app-running)
+
 ## Techonologies used in making this web app
 
 - Javascript
